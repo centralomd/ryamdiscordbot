@@ -38,7 +38,7 @@ bot.on('message', message=>{
             message.channel.bulkDelete(args[1]);
             break;
         case 'embedtest':
-            const embed = new.Discord.MessageEmbed()
+            const embed = new Discord.MessageEmbed()
             .addField('Player Name', message.author.username);
             message.channel.send(embed);
         break;
