@@ -37,6 +37,11 @@ bot.on('message', message=>{
             if(!args[1]) return message.reply('Please input a number.')
             message.channel.bulkDelete(args[1]);
             break;
+        case 'embedtest':
+            const embed = new.Discord.MessageEmbed()
+            .addField('Player Name', message.author.username);
+            message.channel.send(embed);
+        break;
     }
 })
 
