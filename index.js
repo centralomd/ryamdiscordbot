@@ -8,6 +8,7 @@ const PREFIX = 'r!';
 
 bot.on('ready', () =>{
     console.log('Ryam bot is now online and running!')
+    bot.user.setActivity('players raging', { type: 'LISTENING'}).catch(console.error);
 })
 
 bot.on('message', message=>{
