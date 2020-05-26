@@ -42,7 +42,9 @@ bot.on('message', message=>{
             }
             break;
         case 'clear':
+            if(!message.member.roles.cache.find(r => r.name === "Nyam")) return message.channel.send('Action not granted. Reason: "Nyam" role required.')
             if(!args[1]) return message.reply('Please input a number.')
+            .then(message => message.delete({timeout:4500}));
             message.channel.bulkDelete(args[1]);
             break;
     }
