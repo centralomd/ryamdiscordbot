@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
+var version = '1.0beta';
+var buildstatus = 'Beta Test';
 
 const PREFIX = 'r!';
 
@@ -25,7 +27,13 @@ bot.on('message', message=>{
             if(!args[1]) return message.reply('Available commands: `r!info bot`, `r!info buildstatus`.')
 
             if(args[1] === 'buildstatus'){
-                message.channel.send('Build Status: Pre-Beta Test')
+                const embed = new Discord.MessageEmbed()
+                .setTitle('Ryam BuildStatus')
+                .addField('Status', buildstatus)
+                .addField('Version', version)
+                .setColor('0xEE6217')
+                .setFooter('Ryam v1b • BuildStatus')
+                message.channel.send(embed)
             }
             if (args[1] === 'bot'){
                     message.channel.send('This bot currently only send simple texts. More advanced commands coming soon!')
@@ -37,11 +45,6 @@ bot.on('message', message=>{
             if(!args[1]) return message.reply('Please input a number.')
             message.channel.bulkDelete(args[1]);
             break;
-        case 'embedtest':
-            const embed = new Discord.MessageEmbed()
-            .addField('Player Name', message.author.username);
-            message.channel.send(embed);
-        break;
     }
 })
 
