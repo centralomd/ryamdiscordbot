@@ -10,12 +10,21 @@ bot.on('ready', () =>{
     bot.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
 })
 
-bot.on('message', message=>{
+client.on('message', message=>{
+
+//Messages setup:
+
+    const args = message.content.slice(prefix.length).split(' ');
+    const command = args.shift().toLowerCase();
+
+    const taggedUser = message.mention.users.first();
 
     if(!message.content.startsWith(PREFIX)) return;
     
     let args = message.content.substring(PREFIX.length).split(" ")
-    
+
+// Messages begin here:
+
     switch(args[0]){
         case 'ping':
             message.channel.send('pong!')
@@ -39,16 +48,21 @@ bot.on('message', message=>{
             .then(message => message.delete({timeout:4500}));
             message.channel.bulkDelete(args[1]);
             break;
-
-    // Fun Commands - Just for fun ;)
-
         case 'yeet':
-            else if (command === 'kick') {
-                // grab the "first" mentioned user from the message
-                // this will return a `User` object, just like `message.author`
-                const taggedUser = message.mentions.users.first();
-            
-                message.channel.send(`You wanted to kick: ${taggedUser.username}`);
+            const yeeterror = new Discord.MessageEmbed()
+                .setColor('#E81515')
+                .setTitle('MENTION UNDEFINED')
+                .setDescription('You did not mention anyone.')
+
+            const yeetembed = new Discord.MessageEmbed()
+                .setColor('#E96A00')
+                .setTitle('YEET!')
+                .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
+
+            if (mention === null){ 
+                return message.channel.send(yeeterror);
+            }else{
+                message.channel.send(yeetembed)
             }
             break;
     }
