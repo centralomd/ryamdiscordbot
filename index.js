@@ -29,8 +29,8 @@ bot.on('message', message=>{
         case 'buildstatus':
             const embed = new Discord.MessageEmbed()
             .setTitle(version)
-            .setDescription('***This is the cuurent bot version.***')
-            .setColor('0xFFC300')
+            .setDescription('***This is the current bot version.***')
+            .setColor('#E96A00')
             message.channel.send(embed)
             break;
         case 'clear':
@@ -38,6 +38,25 @@ bot.on('message', message=>{
             if(!args[1]) return message.reply('Please input a number.')
             .then(message => message.delete({timeout:4500}));
             message.channel.bulkDelete(args[1]);
+            break;
+
+    // Fun Commands - Just for fun ;)
+
+        case 'yeet':
+            if (!message.mentions.users.size) {
+                return 
+                const embed = new Discord.MessageEmbed()
+                .setColor('#E81515')
+                .setTitle('MENTION UNDEFINED')
+                .setDescription('You did not mention anyone.')
+                message.channel.send(embed)
+            }
+                const taggedUser = message.mentions.users.first();
+                const embed = new Discord.MessageEmbed()
+                .setColor('#E96A00')
+                .setTitle('YEET!')
+                .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
+                message.channel.send(embed)
             break;
     }
 })
