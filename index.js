@@ -1,14 +1,11 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 
-var version = '1.0beta';
-var buildstatus = 'Beta Test';
-
 const PREFIX = 'r!';
 
 bot.on('ready', () =>{
     console.log('Ryam bot is now online and running!')
-    bot.user.setActivity('players raging', { type: 'LISTENING'}).catch(console.error);
+    bot.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
 })
 
 bot.on('message', message=>{
@@ -25,21 +22,20 @@ bot.on('message', message=>{
             message.channel.send('Hi! How are you?')
             break;
         case 'info':
-            if(!args[1]) return message.reply('Available commands: `r!info bot`, `r!info buildstatus`.')
+            if(!args[1]) return message.reply('Available commands: `r!info bot`, `r!info version`.')
 
-            if(args[1] === 'buildstatus'){
+            if(args[1] === 'version'){
                 const embed = new Discord.MessageEmbed()
-                .setTitle('Ryam BuildStatus')
-                .addField('Status', buildstatus)
-                .addField('Version', version)
-                .setColor('0xEE6217')
-                .setFooter('Ryam v1b • BuildStatus')
+                .setTitle('v1.0beta')
+                .addField('***This is the current bot"s version.***')
+                .setColor('0xFFC300')
+                .setFooter('r!info')
                 message.channel.send(embed)
             }
             if (args[1] === 'bot'){
                     message.channel.send('This bot currently only send simple texts. More advanced commands coming soon!')
             }else{
-                message.channel.send('Argument 1 Not found or Invalid Command. Available commands: `r!info bot`, `r!info buildstatus`.')
+                message.channel.send('Argument 1 Not found or Invalid Command.')
             }
             break;
         case 'clear':
