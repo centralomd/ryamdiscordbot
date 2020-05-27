@@ -14,8 +14,6 @@ bot.on('message', message=>{
 
 //Messages setup:
 
-    const taggedUser = message.mention.users.first();
-
     if(!message.content.startsWith(PREFIX)) return;
     
     let args = message.content.substring(PREFIX.length).split(" ")
@@ -56,8 +54,9 @@ bot.on('message', message=>{
                 .setTitle('YEET!')
                 .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
 
-            if (!args[1]){ 
-                return message.channel.send(yeeterror);
+            const taggedUser = message.mention.users.first();
+            if (!message.mentions.users.size) {
+	            return message.channel.send(yeeterror);
             }else{
                 message.channel.send(yeetembed)
             }
