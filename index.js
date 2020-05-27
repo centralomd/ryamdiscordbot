@@ -1,12 +1,8 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const { prefix, token } = require('./config.json');
 const bot = new Discord.Client();
 
-var version = 'v1.0beta';
-
-const PREFIX = 'r!';
-
-bot.on('ready', () =>{
+bot.once('ready', () => {
     console.log('Ryam bot is now online and running!')
     bot.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
 })
