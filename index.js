@@ -12,19 +12,22 @@ bot.on('ready', () =>{
 
 bot.on('message', message=>{
 
-//Messages setup:
+    if (message.content === `${prefix}ping`) {
+        message.channel.send('Pong.');
+
+
+
+
+
+
+
 
     if(!message.content.startsWith(PREFIX)) return;
 
     const args = message.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
 
-// Messages begin here:
-
     switch(args[0]){
-        case 'ping':
-            message.channel.send('pong!')
-            break;
         case 'hello':
             message.channel.send('Hi! How are you?')
             break;
