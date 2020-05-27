@@ -43,20 +43,13 @@ bot.on('message', message=>{
     // Fun Commands - Just for fun ;)
 
         case 'yeet':
-            if (!message.mentions.users.size) {
-                return 
-                const yeet1 = new Discord.MessageEmbed()
-                .setColor('#E81515')
-                .setTitle('MENTION UNDEFINED')
-                .setDescription('You did not mention anyone.')
-                message.channel.send(embed)
-            }
+            else if (command === 'kick') {
+                // grab the "first" mentioned user from the message
+                // this will return a `User` object, just like `message.author`
                 const taggedUser = message.mentions.users.first();
-                const yeet2 = new Discord.MessageEmbed()
-                .setColor('#E96A00')
-                .setTitle('YEET!')
-                .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
-                message.channel.send(embed)
+            
+                message.channel.send(`You wanted to kick: ${taggedUser.username}`);
+            }
             break;
     }
 })
