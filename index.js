@@ -15,8 +15,9 @@ bot.on('message', message=>{
 //Messages setup:
 
     if(!message.content.startsWith(PREFIX)) return;
-    
-    let args = message.content.substring(PREFIX.length).split(" ")
+
+    const args = message.content.slice(prefix.length).split(' ');
+    const command = args.shift().toLowerCase();
 
 // Messages begin here:
 
@@ -44,22 +45,14 @@ bot.on('message', message=>{
             message.channel.bulkDelete(args[1]);
             break;
         case 'yeet':
-            const yeeterror = new Discord.MessageEmbed()
-                .setColor('#E81515')
-                .setTitle('MENTION UNDEFINED')
-                .setDescription('You did not mention anyone.')
-
-            const yeetembed = new Discord.MessageEmbed()
-                .setColor('#E96A00')
-                .setTitle('YEET!')
-                .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
-
-            if (!message.mentions.users.size) {
-                return message.channel.send(yeeterror);
-            }else{
-                message.channel.send(yeetembed)
+            if (command === 'kick') {
+                if (!message.mentions.users.size) {
+                    return message.reply('you need to tag a user in order to kick them!');
+                }
+                const taggedUser = message.mentions.users.first();
+            
+                message.channel.send(`You wanted to kick: ${taggedUser.username}`);
             }
-            const taggedUser = message.mention.users.first();
             break;
     }
 })
