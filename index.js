@@ -48,4 +48,4 @@ const command = args.shift().toLowerCase();
    
 })
 
-bot.login(process.env.token);
+client.login(process.env.token);
