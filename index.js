@@ -45,14 +45,14 @@ bot.on('message', message=>{
         case 'yeet':
             if (!message.mentions.users.size) {
                 return 
-                const embed = new Discord.MessageEmbed()
+                const yeet1 = new Discord.MessageEmbed()
                 .setColor('#E81515')
                 .setTitle('MENTION UNDEFINED')
                 .setDescription('You did not mention anyone.')
                 message.channel.send(embed)
             }
                 const taggedUser = message.mentions.users.first();
-                const embed = new Discord.MessageEmbed()
+                const yeet2 = new Discord.MessageEmbed()
                 .setColor('#E96A00')
                 .setTitle('YEET!')
                 .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
