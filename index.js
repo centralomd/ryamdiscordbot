@@ -27,9 +27,8 @@ bot.on('message', message=>{
             if(args[1] === 'version'){
                 const embed = new Discord.MessageEmbed()
                 .setTitle('v1.0beta')
-                .addField('***This is the current bot"s version.***')
+                .addField('***This is the current bot version.***')
                 .setColor('0xFFC300')
-                .setFooter('r!info')
                 message.channel.send(embed)
             }
             if (args[1] === 'bot'){
