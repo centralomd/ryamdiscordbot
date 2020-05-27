@@ -10,7 +10,7 @@ bot.on('ready', () =>{
     bot.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
 })
 
-client.on('message', message=>{
+bot.on('message', message=>{
 
 //Messages setup:
 
