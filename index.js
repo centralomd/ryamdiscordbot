@@ -1,14 +1,18 @@
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
-const bot = new Discord.Client();
+const client = new Discord.Client();
 
-bot.once('ready', () => {
+client.once('ready', () => {
     console.log('Ryam bot is now online and running!')
-    bot.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
+    client.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
 })
 
 
-bot.on('message', message=>{
+client.on('message', message=>{
+if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+const args = message.content.slice(prefix.length).split(/ +/);
+const command = args.shift().toLowerCase();
 
     if (message.content === `${prefix}ping`) {
         message.channel.send('Pong.');
@@ -19,6 +23,20 @@ bot.on('message', message=>{
             .setTitle(`${message.guild.name}`)
             .setDescription('This is the name of the server this bot is on.')
         message.channel.send(servername);
+    } else if (command === 'yeet') {
+        const yeeterror = new Discord.MessageEmbed()
+                .setColor('#E81515')
+                .setTitle('MENTION UNDEFINED')
+                .setDescription('You did not mention anyone.')
+        if (!message.mentions.users.size) {
+            return message.channel.send(yeeterror);
+        }
+        const taggedUser = message.mentions.users.first();
+        const yeetembed = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setTitle('YEET!')
+            .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
+        message.channel.send(yeetembed);
     }
 
 
