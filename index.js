@@ -54,12 +54,12 @@ bot.on('message', message=>{
                 .setTitle('YEET!')
                 .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
 
-            const taggedUser = message.mention.users.first();
             if (!message.mentions.users.size) {
-	            return message.channel.send(yeeterror);
+                return message.channel.send(yeeterror);
             }else{
                 message.channel.send(yeetembed)
             }
+            const taggedUser = message.mention.users.first();
             break;
     }
 })
