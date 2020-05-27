@@ -23,7 +23,7 @@ bot.on('message', message=>{
             .setTitle(`${message.guild.name}`)
             .setDescription('This is the name of the server this bot is on.')
         channel.send(servername);
-    } 
+    }
 
 
 
