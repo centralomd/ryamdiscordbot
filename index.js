@@ -18,7 +18,7 @@ bot.on('message', message=>{
         const servername = new Discord.MessageEmbed()
             .setTitle(`${message.guild.name}`)
             .setDescription('This is the name of the server this bot is on.')
-        channel.send(servername);
+        message.channel.send(servername);
     }
 
 
