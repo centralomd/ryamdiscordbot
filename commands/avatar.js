@@ -13,9 +13,13 @@ module.exports = {
         if (!message.mentions.users.size) {
             return message.channel.send(oneavatarembed);
         }
-
+        
+        const multiavatar = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setTitle(`${user.username}'s avatar:`)
+            .setDescription(`<${user.displayAvatarURL({ format: "png", dynamic: true })}>`)
         const avatarList = message.mentions.users.map(user => {
-            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+            return message.channel.send(multiavatar);
         });
         message.channel.send(avatarList);
     },
