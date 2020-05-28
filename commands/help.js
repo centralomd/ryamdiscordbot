@@ -20,6 +20,7 @@ module.exports = {
 				{ name: 'r!clear', value: '**Delete/clear messages mentioned.**' },
 				{ name: 'r!avatar', value: '**Shows the avatar of that person.**' },
 			)
+			.setFooter('Ryam v1b • Help Menu')
 		message.channel.send(helpembed)
 	},
 };
