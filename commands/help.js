@@ -12,6 +12,7 @@ module.exports = {
 			.setTitle('HELP: ALL COMMAND LIST')
 			.setDescription('Here\'s all the commands on this bot:')
 			.addFields(
+				{ name: '‎', value: '‎'},
 				{ name: 'r!ping', value: '**Test command.**' },
 				{ name: 'r!hello', value: '**Just a simple hello.**' },
 				{ name: 'r!help', value: '**Shows a list of all the commands.**' },
