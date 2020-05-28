@@ -26,6 +26,11 @@ if (!message.content.startsWith(prefix) || message.author.bot) return;
 const args = message.content.slice(prefix.length).split(/ +/);
 const commandName = args.shift().toLowerCase();
 
+const command = client.commands.get(commandName)
+        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+    if (!command) return;
+
 if (command.guildOnly && message.channel.type !== 'text') {
 	return message.reply('I can\'t execute that command inside DMs!');
 }
@@ -34,11 +39,6 @@ if (command.guildOnly && message.channel.type !== 'text') {
         .setColor('#F03D3D')
         .setTitle('EXECUTION ERROR')
         .setDescription('Command failed to execute, or command doesn\'t exist.')
-
-    const command = client.commands.get(commandName)
-        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-
-    if (!command) return;
 
     if (!cooldowns.has(command.name)) {
         cooldowns.set(command.name, new Discord.Collection());
