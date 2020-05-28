@@ -5,7 +5,7 @@ module.exports = {
 	usage: '[command name]',
 	cooldown: 5,
 	execute(message, args) {
-		const data = push();
+		const data = [].push();
         const { commands } = message.client;
 
         if (!args.length) {
