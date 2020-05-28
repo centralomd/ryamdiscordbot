@@ -42,7 +42,7 @@ const command = args.shift().toLowerCase();
         const oneavatarembed = new Discord.MessageEmbed()
             .setColor('#E96A00')
             .setTitle('Requested Avatar')
-            .setURL(`<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`)
+            .setDescription(`<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`)
         if (!message.mentions.users.size) {
             return message.channel.send(oneavatarembed);
         }
