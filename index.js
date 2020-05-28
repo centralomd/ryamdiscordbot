@@ -20,6 +20,7 @@ const command = args.shift().toLowerCase();
         message.channel.send('Hi! How are you?');
     } else if (message.content === `${prefix}server`) {
         const servername = new Discord.MessageEmbed()
+            .setColor('#E96A00')
             .setTitle(`${message.guild.name}`)
             .setDescription('This is the name of the server this bot is on.')
         message.channel.send(servername);
@@ -37,6 +38,19 @@ const command = args.shift().toLowerCase();
             .setTitle('YEET!')
             .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
         message.channel.send(yeetembed);
+    } else if (command === 'avatar') {
+        const oneavatarembed = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setTitle('Requested Avatar')
+            .setURL(`<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`)
+        if (!message.mentions.users.size) {
+            return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+        }
+
+        const avatarList = message.mentions.users.map(user => {
+            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+        });
+        message.channel.send(avatarList);
     }
 
 
