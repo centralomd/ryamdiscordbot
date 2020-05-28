@@ -44,8 +44,13 @@ const command = args.shift().toLowerCase();
             .setTitle('Requested Avatar')
             .setURL(`<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`)
         if (!message.mentions.users.size) {
-            return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`);
+            return message.channel.send(oneavatarembed);
         }
+
+        const avatarList = message.mentions.users.map(user => {
+            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+        });
+        message.channel.send(avatarList);
     }
 
 
