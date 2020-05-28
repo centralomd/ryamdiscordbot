@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'yeet',
     description: 'Yeet any person you mention. For fun.',
-    cooldown: 10,
+    cooldown: 7,
     guildOnly: true,
 	execute(message, args) {
 		const yeeterror = new Discord.MessageEmbed()
