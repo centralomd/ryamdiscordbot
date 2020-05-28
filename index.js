@@ -52,11 +52,6 @@ if (command.guildOnly && message.channel.type !== 'text') {
         // ...
     }
 
-    const cooldownembed = new Discord.MessageEmbed()
-        .setColor('#F03D3D')
-        .setTitle('COMMAND COOLDOWN')
-        .setDescription(`Please wait for ${timeLeft.toFixed(1)} more second(s) before reusing the \```${command.name}\``` command.`)
-
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     
@@ -64,6 +59,10 @@ if (command.guildOnly && message.channel.type !== 'text') {
             const timeLeft = (expirationTime - now) / 1000;
             return message.send(cooldownembed);
         }
+        const cooldownembed = new Discord.MessageEmbed()
+        .setColor('#F03D3D')
+        .setTitle('COMMAND COOLDOWN')
+        .setDescription(`Please wait for ${timeLeft.toFixed(1)} more second(s) before reusing the \```${command.name}\``` command.`)
     } 
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
