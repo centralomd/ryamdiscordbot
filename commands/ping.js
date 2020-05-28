@@ -9,5 +9,6 @@ module.exports = {
             .setColor('#1CE300')
             .setTitle('PONG!')
             .setDescription('**Test successfull! Bot is working perfectly! :ok_hand:')
+        message.channel.send(pingembed)
     },
 };
