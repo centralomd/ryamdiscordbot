@@ -29,7 +29,7 @@ module.exports = {
         } message.channel.bulkDelete(amount, true).catch(err => {
             console.error(err);
             message.channel.send('there was an error trying to prune messages in this channel!');
-        if (!message.member.roles.find(r => r.name === "Owner" || "Admin")) return message.channel.send(clearadminbad)
+        if(!message.member.hasPermission("Owner"||"Admin"||"Nyam", explicit = true)) return message.channel.send(clearadminbad)
         });
         message.channel.send(delsuccess);
     },
