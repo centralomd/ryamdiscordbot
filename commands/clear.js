@@ -16,7 +16,7 @@ module.exports = {
             .setColor('#1CE300')
             .setTitle('Deletion Success.')
             .setDescription('The number of messages chosen has been deleted!')
-        const 
+        
         if (isNaN(amount)) {
             return message.channel.send(delfail);
         } else if (amount < 1 || amount > 100) {
