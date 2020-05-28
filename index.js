@@ -68,7 +68,7 @@ const command = args.shift().toLowerCase();
         if (isNaN(amount)) {
             return message.channel.send(delfail);
         } else if (amount < 2 || amount > 100) {
-            return message.send(delamountfail);
+            return message.channel.send(delamountfail);
         } message.channel.bulkDelete(amount);
         message.channel.send(delsuccess)
     } 
