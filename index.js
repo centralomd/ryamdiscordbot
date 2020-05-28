@@ -57,7 +57,11 @@ if (command.guildOnly && message.channel.type !== 'text') {
     
         if (now < expirationTime) {
             const timeLeft = (expirationTime - now) / 1000;
-            return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+            const coolerror = new Discord.MessageEmbed()
+                .setColor('#F03D3D')
+                .setTitle('COMMAND IN COOLDOWN')
+                .setDescription(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
+            return message.channel.send(coolerror);
         }
     } 
     timestamps.set(message.author.id, now);
