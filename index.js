@@ -1,6 +1,19 @@
+const { prefix } = require('../config.json');
+const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
+
 const client = new Discord.Client();
+client.commands = new Discord.Collection();
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
+
+const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
     console.log('Ryam bot is now online and running!')
@@ -12,65 +25,55 @@ client.on('message', message=>{
 if (!message.content.startsWith(prefix) || message.author.bot) return;
 
 const args = message.content.slice(prefix.length).split(/ +/);
-const command = args.shift().toLowerCase();
+const commandName = args.shift().toLowerCase();
 
-    if (message.content === `${prefix}ping`) {
-        message.channel.send('Pong.');
-    } else if (message.content.startsWith(`${prefix}hello`)) {
-        message.channel.send('Hi! How are you?');
-    } else if (message.content === `${prefix}server`) {
-        const servername = new Discord.MessageEmbed()
-            .setColor('#E96A00')
-            .setTitle(`${message.guild.name}`)
-            .setDescription('This is the name of the server this bot is on.')
-        message.channel.send(servername);
-    } else if (command === 'yeet') {
-        const yeeterror = new Discord.MessageEmbed()
-                .setColor('#E81515')
-                .setTitle('MENTION UNDEFINED')
-                .setDescription('You did not mention anyone.')
-        if (!message.mentions.users.size) {
-            return message.channel.send(yeeterror);
-        }
-        const taggedUser = message.mentions.users.first();
-        const yeetembed = new Discord.MessageEmbed()
-            .setColor('#E96A00')
-            .setTitle('YEET!')
-            .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
-        message.channel.send(yeetembed);
-    } else if (command === 'avatar') {
-        const oneavatarembed = new Discord.MessageEmbed()
-            .setColor('#E96A00')
-            .setTitle('Requested Avatar')
-            .setDescription(`<${message.author.displayAvatarURL({ format: "png", dynamic: true })}>`)
-        if (!message.mentions.users.size) {
-            return message.channel.send(oneavatarembed);
-        }
+if (command.guildOnly && message.channel.type !== 'text') {
+	return message.reply('I can\'t execute that command inside DMs!');
+}
 
-        const avatarList = message.mentions.users.map(user => {
-            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
-        });
-        message.channel.send(avatarList);
-    } else if (command === 'clear') {
-        const amount = parseInt(args[0]);
-        const delfail = new Discord.MessageEmbed()
-            .setColor('#F03D3D')
-            .setTitle('ERROR')
-            .setDescription('Oops, that doesn\'t seem to be a valid number.')
-        const delamountfail = new Discord.MessageEmbed()
-            .setColor('#F03D3D')
-            .setTitle('Amount Error')
-            .setDescription('You need to input a number between 2 and 100.')
-        const delsuccess = new Discord.MessageEmbed()
-            .setColor('#1CE300')
-            .setTitle('Deletion Success ✔')
-            .setDescription('The number of messages chosen has been deleted!')
-        if (isNaN(amount)) {
-            return message.channel.send(delfail);
-        } else if (amount < 2 || amount > 100) {
-            return message.channel.send(delamountfail);
-        } message.channel.bulkDelete(amount);
-        message.channel.send(delsuccess)
+    const errorcommand = new Discord.MessageEmbed()
+        .setColor('#F03D3D')
+        .setTitle('EXECUTION ERROR')
+        .setDescription('Command failed to execute, or command doesn\'t exist.')
+
+    const command = client.commands.get(commandName)
+        || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+    if (!command) return;
+
+    if (!cooldowns.has(command.name)) {
+        cooldowns.set(command.name, new Discord.Collection());
+    }
+    
+    const now = Date.now();
+    const timestamps = cooldowns.get(command.name);
+    const cooldownAmount = (command.cooldown || 3) * 1000;
+    
+    if (timestamps.has(message.author.id)) {
+        // ...
+    }
+
+    const cooldownembed = new Discord.MessageEmbed()
+        .setColor('#F03D3D')
+        .setTitle('COMMAND COOLDOWN')
+        .setDescription(`Please wait for ${timeLeft.toFixed(1)} more second(s) before reusing the \```${command.name}\``` command.`)
+
+    if (timestamps.has(message.author.id)) {
+        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    
+        if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
+            return message.send(cooldownembed);
+        }
+    } 
+    timestamps.set(message.author.id, now);
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+    try {
+	    command.execute(message, args);
+    } catch (error) {
+	    console.error(error);
+	    message.channel.send(errorcommand);
     } 
 
 
