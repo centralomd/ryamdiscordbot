@@ -66,7 +66,7 @@ const command = args.shift().toLowerCase();
             .setTitle('Deletion Success ✔')
             .setDescription('The number of messages chosen has been deleted!')
         if (isNaN(amount)) {
-            return message.send(delfail);
+            return message.channel.send(delfail);
         } else if (amount < 2 || amount > 100) {
             return message.send(delamountfail);
         } message.channel.bulkDelete(amount);
