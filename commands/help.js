@@ -20,6 +20,7 @@ module.exports = {
 				{ name: '**r!server**', value: '**Shows the name of the server this bot is on.**' },
 				{ name: '**r!clear**', value: '**Delete/clear messages mentioned.**' },
 				{ name: '**r!avatar**', value: '**Shows the avatar of that person.**' },
+				{ name: '**Music Commands', value: '***Coming Soon!***'},
 			)
 			.setFooter('Ryam v1b • Help Menu')
 		message.channel.send(helpembed)
