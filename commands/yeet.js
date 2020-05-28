@@ -17,7 +17,7 @@ module.exports = {
         const yeetembed = new Discord.MessageEmbed()
             .setColor('#E96A00')
             .setTitle('YEET!')
-            .setDescription(`${message.author} yeeted ${taggedUser.username} sky-high.`)
+            .setDescription(`${message.author} yeeted **${taggedUser.username}** sky-high.`)
         message.channel.send(yeetembed);
     },
 };
