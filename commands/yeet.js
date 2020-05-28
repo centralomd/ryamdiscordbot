@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = {
     name: 'yeet',
     description: 'Yeet any person you mention. For fun.',

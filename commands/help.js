@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = {
 	name: 'help',
 	description: 'List all the available commands.',
@@ -5,23 +7,18 @@ module.exports = {
 	usage: '[command name]',
 	cooldown: 5,
 	execute(message, args) {
-		const data = [].push();
-        const { commands } = message.client;
-
-        if (!args.length) {
-            data.push('Here\'s a list of all my commands:');
-            data.push(commands.map(command => command.name).join(', '));
-            data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
-
-        return message.author.send(data, { split: true })
-	        .then(() => {
-		        if (message.channel.type === 'dm') return;
-		        message.reply('DM has been sent with list of commands.');
-	    })
-	        .catch(error => {
-		    console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-		    message.reply('DM failed to be sent. Make sure your DMs are enabled and try again.');
-	});
-        }
+		const helpembed = new Discord.MessageEmbed()
+			.setColor('#E96A00')
+			.setTitle('HELP: ALL COMMAND LIST')
+			.setDescription('Here\'s all the commands on this bot:')
+			.addFields(
+				{ name: 'r!ping', value: '**Test command.**' },
+				{ name: 'r!hello', value: '**Just a simple hello.**' },
+				{ name: 'r!help', value: '**Shows a list of all the commands.**' },
+				{ name: 'r!yeet', value: '**Yeet peoples you mention, just for fun.**' },
+				{ name: 'r!server', value: '**Shows the name of the server this bot is on.**' },
+				{ name: 'r!clear', value: '**Delete/clear messages mentioned.**' },
+				{ name: 'r!avatar', value: '**Shows the avatar of that person.**' },
+			)
 	},
 };

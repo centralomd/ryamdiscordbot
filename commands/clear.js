@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = {
     name: 'clear',
     description: 'Clears or delete messages.',
