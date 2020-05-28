@@ -16,7 +16,7 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
     console.log('Ryam bot is now online and running!')
-    client.user.setActivity('with Codes', { type: 'PLAYING'}).catch(console.error);
+    client.user.setActivity('r!help', { type: 'LISTENING'}).catch(console.error);
 })
 
 
