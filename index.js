@@ -56,11 +56,11 @@ if (command.guildOnly && message.channel.type !== 'text') {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     
         if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
             const cooldownembed = new Discord.MessageEmbed()
                 .setColor('#F03D3D')
                 .setTitle('COMMAND COOLDOWN')
                 .setDescription(`Please wait for ${timeLeft.toFixed(1)} more second(s) before reusing the \```${command.name}\``` command.`)
-            const timeLeft = (expirationTime - now) / 1000;
             return message.send(cooldownembed);
         }
     } 
