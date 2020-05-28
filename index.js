@@ -46,7 +46,32 @@ const command = args.shift().toLowerCase();
         if (!message.mentions.users.size) {
             return message.channel.send(oneavatarembed);
         }
-    }
+
+        const avatarList = message.mentions.users.map(user => {
+            return `${user.username}'s avatar: <${user.displayAvatarURL({ format: "png", dynamic: true })}>`;
+        });
+        message.channel.send(avatarList);
+    } else if (command === 'clear') {
+        const amount = parseInt(args[0]);
+        const delfail = new Discord.MessageEmbed()
+            .setColor('#F03D3D')
+            .setTitle('ERROR')
+            .setDescription('Oops, that doesn\'t seem to be a valid number.')
+        const delamountfail = new Discord.MessageEmbed()
+            .setColor('#F03D3D')
+            .setTitle('Amount Error')
+            .setDescription('You need to input a number between 2 and 100.')
+        const delsuccess = new Discord.MessageEmbed()
+            .setColor('#1CE300')
+            .setTitle('Deletion Success ✔')
+            .setDescription('The number of messages chosen has been deleted!')
+        if (isNaN(amount)) {
+            return message.send(delfail);
+        } else if (amount < 2 || amount > 100) {
+            return message.send(delamountfail);
+        } message.channel.bulkDelete(amount);
+        message.channel.send(delsuccess)
+    } 
 
 
 
