@@ -9,8 +9,8 @@ module.exports = {
 	execute(message, args) {
 		const helpembed = new Discord.MessageEmbed()
 			.setColor('#E96A00')
-			.setTitle('HELP: ALL COMMAND LIST')
-			.setDescription('Here\'s all the commands on this bot:')
+			.setTitle('Command List')
+			.setDescription('Currently available commands:')
 			.addFields(
 				{ name: '‎', value: '‎'},
 				{ name: '**r!ping**', value: '**Test command.**' },
