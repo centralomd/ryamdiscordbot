@@ -23,7 +23,7 @@ module.exports = {
         const pumpembed = new Discord.MessageEmbed()
             .setColor('#1CE300')
             .setTitle('PEW!')
-            .setDescription(`${message.author} tagged **${taggedUser.username}** for `, replies[result])
+            .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + replies[result])
         message.channel.send(pumpembed)
     },
 };
