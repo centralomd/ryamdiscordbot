@@ -7,7 +7,7 @@ name: 'invite',
 	execute(message, args) {
         const inviteembed = new Discord.MessageEmbed()
             .setColor('#E96A00')
-            .setTitle('Hold this text to get link.')
+            .setTitle('Left click or Hold this text to get the link.')
             .setURL('https://discordapp.com/oauth2/authorize?client_id=713715944995946499&scope=bot&permissions=2146958847')
         message.channel.send(inviteembed)
     },
