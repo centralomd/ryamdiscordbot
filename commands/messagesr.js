@@ -5,11 +5,11 @@ module.exports = {
     description: 'See how fast can you type in miliseconds!',
     cooldown: 0,
 	execute(message, args) {
+        (async() => {
         const typespeedbegin = new Discord.MessageEmbed()
             .setColor('#BDD1E6')
             .setTitle('Begin Speedrun')
             .setDescription('Send two messages and I\'ll tell you how far apart you sent them.')
-        
             await message.channel.send(typespeedbegin);
             const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
 	            max: 2,
@@ -25,5 +25,6 @@ module.exports = {
             .setDescription(`You sent the two messages ${formatted} apart.`)
 
             message.channel.send(typespeedend);
+        })();
     },
 };
