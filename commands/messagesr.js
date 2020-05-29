@@ -18,7 +18,6 @@ module.exports = {
             });
 
             const difference = messages.last().createdTimestamp - messages.first().createdTimestamp;
-
             const formatted = ms(difference);
 
             const typespeedend = new Discord.MessageEmbed()
