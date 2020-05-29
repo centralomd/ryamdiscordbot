@@ -20,6 +20,8 @@ module.exports = {
 				{ name: '**r!server**', value: 'Shows the name of the server this bot is on.' },
 				{ name: '**r!clear**', value: 'Delete/clear messages mentioned.' },
 				{ name: '**r!avatar**', value: 'Shows the avatar of that person.' },
+				{ name: '**r!gn**', value: 'Says goodnight to the mentioned user. Respect them.'},
+				{name: '**r!invite**', value: 'Get the invite link for this bot.'},
 				{ name: '‎', value: '‎'},
 				{ name: '**Coming Soon!**', value: 'Music Commands'},
 			)

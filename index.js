@@ -60,7 +60,7 @@ if (command.guildOnly && message.channel.type !== 'text') {
             const coolerror = new Discord.MessageEmbed()
                 .setColor('#F03D3D')
                 .setTitle('COMMAND IN COOLDOWN')
-                .setDescription(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
+                .setDescription(`Wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
             return message.channel.send(coolerror);
         }
     } 
