@@ -8,7 +8,7 @@ module.exports = {
         const pingembed = new Discord.MessageEmbed()
             .setColor('#1CE300')
             .setTitle('PONG!')
-            .setDescription('**Test successfull! Bot is working perfectly!** :ok_hand:')
+            .setDescription('Test successfull! Bot is working perfectly! :ok_hand:')
         message.channel.send(pingembed)
     },
 };
