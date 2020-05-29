@@ -16,14 +16,14 @@ module.exports = {
             return message.channel.send(pumpundefined);
         }
 
-        let replies = ["blank shot.", "8 damage.", "23 damage.", "69 damage.", "100 damage", "169 damage", "200 damage"];
+        const dmg = ["blank shot.", "8 damage.", "23 damage.", "69 damage.", "100 damage", "169 damage", "200 damage"];
 
-        let result = Math.floor((Math.random() * replies.length));
+        const dmgres = Math.floor((Math.random() * replies.length));
 
         const pumpembed = new Discord.MessageEmbed()
             .setColor('#1CE300')
             .setTitle('PEW!')
-            .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + replies[result])
+            .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + dmg[dmgres])
         message.channel.send(pumpembed)
     },
 };
