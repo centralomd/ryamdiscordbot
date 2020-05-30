@@ -17,13 +17,21 @@ module.exports = {
         }
 
         const dmg = ["blank shot.", "8 damage.", "23 damage.", "69 damage.", "100 damage", "169 damage", "200 damage", "220 damage"];
-
         const dmgres = Math.floor((Math.random() * dmg.length));
 
         const pumpembed = new Discord.MessageEmbed()
             .setColor('#1CE300')
             .setTitle('PEW!')
             .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + dmg[dmgres])
-        message.channel.send(pumpembed)
+
+        const pumpammoout = new Discord.MessageEmbed()
+            .setColor('#FC712C')
+            .setTitle('Crk!')
+            .setDescription(`Your ammo run out. Instead of tagging, **${taggedUser.username}** tagged you for ` + dmg[dmgres])
+
+        const dmgormiss = [pumpembed, pumpammoout]
+        const dmgormissres = Math.floor((Math.random() * dmg.length));
+
+        message.channel.send(dmgormiss[dmgormissres])
     },
 };
