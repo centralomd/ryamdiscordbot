@@ -50,14 +50,6 @@ module.exports = {
                 const connection = await message.member.voice.channel.join()
                 .then(function(connection){
                     play(connection, message)
-
-                const notinvoicechannel = new Discord.MessageEmbed()
-                    .setColor('#F03D3D')
-                    .setTitle('Channel Required.')
-                    .setDescription('You are not in a voice channel!')
-            if (!message.member.voice.Channel){
-                message.channel.send(notinvoicechannel);
-                    }
                 });
             }
         });
