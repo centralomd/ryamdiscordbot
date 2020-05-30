@@ -31,7 +31,7 @@ module.exports = {
         if (args[0]) {
             const user = getUserFromMention(args[0]);
             if (!user) {
-                return message.send(userinvalid);
+                return message.channel.send(userinvalid);
             }
         }
 
