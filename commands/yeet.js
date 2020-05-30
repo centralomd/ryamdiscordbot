@@ -19,7 +19,7 @@ module.exports = {
         const highres = Math.floor((Math.random() * high.length));
         
         const reverseyeet = new Discord.MessageEmbed()
-            .setColor('#E96A00')
+            .setColor('#FC712C')
             .setTitle('YEE- What?!')
             .setDescription(`**${taggedUser.username}** expected an incoming yeet, so **${taggedUser.username}** yeeted ${message.author} first before ${message.author} could even yeet them.`)
 
