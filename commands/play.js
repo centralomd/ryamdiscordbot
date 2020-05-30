@@ -31,11 +31,19 @@ module.exports = {
         .setColor('#F03D3D')
         .setTitle('Music Undefined.')
         .setDescription('Please input the link of the music you wanted to play.')
-        if (!args[0]){
+        if (!args[1]){
             message.channel.send(nolink)
             return;
         }
     
+    const notinvoicechannel = new Discord.MessageEmbed()
+        .setColor('#F03D3D')
+        .setTitle('Channel Required.')
+        .setDescription('You are not in a voice channel!')
+    if (!message.member.voice.Channel){
+        message.channel.send(notinvoicechannel);
+        }
+
         if(!servers[message.guild.id]) servers[message.guild.id] = {
             queue: []
         }
@@ -50,14 +58,6 @@ module.exports = {
                 const connection = await message.member.voice.channel.join()
                 .then(function(connection){
                     play(connection, message)
-
-                const notinvoicechannel = new Discord.MessageEmbed()
-                    .setColor('#F03D3D')
-                    .setTitle('Channel Required.')
-                    .setDescription('You are not in a voice channel!')
-            if (!message.member.voice.Channel){
-                message.channel.send(notinvoicechannel);
-                    }
                 });
             }
         });
