@@ -49,7 +49,8 @@ module.exports = {
 
         server.queue.push(args[0]);
 
-        if(!message.member.voiceConnection) message.member.voice.Channel.join().then(function(connection){
+        if(!message.member.voiceConnection) message.member.voice.Channel.join()
+        .then(function(connection){
             play(connection, message)
         })
     },
