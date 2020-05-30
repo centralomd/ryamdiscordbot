@@ -13,7 +13,7 @@ module.exports = {
             .setTitle('Music Stopped!')
             .setDescription('Current playing music and queue has been cleared and bot is leaving the voice channel!')
         var server = servers[message.guild.id];
-        if (message.guild.voiceConnection){
+        if (message.guild.voice.connection){
             for(var i = server.queue.length -1; i >=0; i--){
                 server.queue.splice(i, 1);
             }
