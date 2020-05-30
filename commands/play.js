@@ -18,7 +18,7 @@ module.exports = {
             server.queue.shift();
 
             server.dispatcher.on('finish', function(){
-                if(server.queue[0]){
+                if(server.queue[1]){
                     play(connection, message);
                 }else {
                     connection.disconnect();
@@ -42,7 +42,7 @@ module.exports = {
 
         var server = servers[message.guild.id];
 
-        server.queue.push(args[0]);
+        server.queue.push(args[1]);
 
         client.on('message', async message => {
             // Join the same voice channel of the author of the message
