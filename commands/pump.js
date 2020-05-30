@@ -30,7 +30,7 @@ module.exports = {
             .setDescription(`Your ammo run out. Instead of tagging, **${taggedUser.username}** tagged you for ` + dmg[dmgres])
 
         const dmgormiss = [pumpembed, pumpammoout]
-        const dmgormissres = Math.floor((Math.random() * dmg.length));
+        const dmgormissres = Math.floor((Math.random() * dmgormiss.length));
 
         message.channel.send(dmgormiss[dmgormissres])
     },
