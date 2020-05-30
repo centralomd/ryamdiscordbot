@@ -27,7 +27,22 @@ module.exports = {
             .setColor('#E96A00')
             .setTitle('YEET!')
             .setDescription(`${message.author} yeeted **${taggedUser.username}** ` + high[highres])
-            
+        
+        const yeetembed2 = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setTitle('YEET!')
+            .setDescription(`${message.author} yeeted **${taggedUser.username}** ` + high[highres])
+
+        const yeetembed3 = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setTitle('YEET!')
+            .setDescription(`${message.author} yeeted **${taggedUser.username}** ` + high[highres])
+
+        const yeetembed4 = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setTitle('YEET!')
+            .setDescription(`${message.author} yeeted **${taggedUser.username}** ` + high[highres])
+
         const reverseorhigh = [reverseyeet, yeetembed]
         const revorhires = Math.floor((Math.random() * reverseorhigh.length));
         

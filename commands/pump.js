@@ -24,12 +24,27 @@ module.exports = {
             .setTitle('PEW!')
             .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + dmg[dmgres])
 
+        const pumpembed2 = new Discord.MessageEmbed()
+            .setColor('#1CE300')
+            .setTitle('PEW!')
+            .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + dmg[dmgres])
+
+        const pumpembed3 = new Discord.MessageEmbed()
+            .setColor('#1CE300')
+            .setTitle('PEW!')
+            .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + dmg[dmgres])
+        
+        const pumpembed4 = new Discord.MessageEmbed()
+            .setColor('#1CE300')
+            .setTitle('PEW!')
+            .setDescription(`${message.author} tagged **${taggedUser.username}** for ` + dmg[dmgres])
+
         const pumpammoout = new Discord.MessageEmbed()
             .setColor('#FC712C')
             .setTitle('Crk!')
             .setDescription(`Your ammo run out. Instead of tagging, **${taggedUser.username}** tagged you for ` + dmg[dmgres])
 
-        const dmgormiss = [pumpembed, pumpammoout]
+        const dmgormiss = [pumpembed, pumpembed2, pumpembed3, pumpembed4, pumpammoout]
         const dmgormissres = Math.floor((Math.random() * dmgormiss.length));
 
         message.channel.send(dmgormiss[dmgormissres])
