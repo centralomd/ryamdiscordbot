@@ -29,7 +29,7 @@ module.exports = {
         .setColor('#F03D3D')
         .setTitle('Music Undefined.')
         .setDescription('Please input the link of the music you wanted to play.')
-        if (!args[1]){
+        if (!args[0]){
             message.channel.send(nolink)
             return;
         }
@@ -47,7 +47,7 @@ module.exports = {
 
         var server = servers[message.guild.id];
 
-        server.queue.push(args[1]);
+        server.queue.push(args[0]);
 
         if(!message.member.voiceConnection) message.member.voice.Channel.join().then(function(connection){
             play(connection, message)
