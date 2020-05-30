@@ -43,7 +43,7 @@ module.exports = {
             .setTitle('YEET!')
             .setDescription(`${message.author} yeeted **${taggedUser.username}** ` + high[highres])
 
-        const reverseorhigh = [reverseyeet, yeetembed]
+        const reverseorhigh = [reverseyeet, yeetembed, yeetembed2, yeetembed3, yeetembed4]
         const revorhires = Math.floor((Math.random() * reverseorhigh.length));
         
         message.channel.send(reverseorhigh[revorhires]);
