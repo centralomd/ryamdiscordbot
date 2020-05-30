@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core');
+const fs = require('fs');
 
 var servers = {};
 
@@ -15,7 +16,7 @@ module.exports = {
 
             server.queue.shift();
 
-            server.dispatcher.on('end', function(){
+            server.dispatcher.on('finish', function(){
                 if(server.queue[0]){
                     play(connection, message);
                 }else {
@@ -33,13 +34,6 @@ module.exports = {
             message.channel.send(nolink)
             return;
         }
-    const notinvoicechannel = new Discord.MessageEmbed()
-        .setColor('#F03D3D')
-        .setTitle('Channel Required.')
-        .setDescription('You are not in a voice channel!')
-        if (!message.member.voice.Channel){
-            message.channel.send(notinvoicechannel);
-        }
     
         if(!servers[message.guild.id]) servers[message.guild.id] = {
             queue: []
@@ -49,9 +43,22 @@ module.exports = {
 
         server.queue.push(args[0]);
 
-        if(!message.member.voiceConnection) message.member.voice.channel.join()
-        .then(function(connection){
-            play(connection, message)
-        })
+        client.on('message', async message => {
+            // Join the same voice channel of the author of the message
+            if (message.member.voice.channel) {
+                const connection = await message.member.voice.channel.join()
+                .then(function(connection){
+                    play(connection, message)
+
+                const notinvoicechannel = new Discord.MessageEmbed()
+                    .setColor('#F03D3D')
+                    .setTitle('Channel Required.')
+                    .setDescription('You are not in a voice channel!')
+            if (!message.member.voice.Channel){
+                message.channel.send(notinvoicechannel);
+                    }
+                });
+            }
+        });
     },
 };
