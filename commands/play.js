@@ -35,6 +35,13 @@ module.exports = {
             message.channel.send(nolink)
             return;
         }
+    const notinvoicechannel = new Discord.MessageEmbed()
+        .setColor('#F03D3D')
+        .setTitle('Channel Required.')
+        .setDescription('You are not in a voice channel!')
+        if (!message.member.voice.Channel){
+            message.channel.send(notinvoicechannel);
+        }
     
         if(!servers[message.guild.id]) servers[message.guild.id] = {
             queue: []
