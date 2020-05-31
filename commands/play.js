@@ -17,7 +17,7 @@ module.exports = {
             if (message.member.voice.channel) {
                 const connection = await message.member.voice.channel.join();
             } 
-            const dispatcher = connection.play('http://myserver.com/audio.aac');
+            const dispatcher = connection.play(musicURL);
 
             dispatcher.on('start', () => {
                 console.log('Music is now playing!');
