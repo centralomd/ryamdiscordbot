@@ -57,7 +57,7 @@ module.exports = {
 			)
 			.setFooter('Ryam v1b • Help Menu')
 		
-		if (member.hasPermission('ADMINISTRATOR')) {
+		if (message.member.hasPermission('ADMINISTRATOR')) {
 			message.channel.send(adminhelpembed)
 		}else message.channel.send(helpembed)
 	},
