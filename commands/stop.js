@@ -12,6 +12,8 @@ module.exports = {
             .setColor('#FA254C')
             .setTitle('Music Stopped!')
             .setDescription('Current playing music and queue has been cleared and bot is leaving the voice channel!')
+
+            const dispatcher = connection.play('http://myserver.com/audio.aac');
         
             connection.disconnect();
             message.channel.send(stopmusic)
