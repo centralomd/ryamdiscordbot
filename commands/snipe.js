@@ -43,6 +43,7 @@ module.exports = {
             .setColor('#1CE300')
             .setTitle('DAR!')
             .setDescription(`${message.author} sniped **${taggedUser.username}** for ` + snipedmg[snipedmgres])
+            
         const snipedmgormiss = [snipehit, snipehit2, snipehit3, snipehit4, snipemiss]
         const snipedmgormissres = Math.floor((Math.random() * snipedmgormiss.length));
 
