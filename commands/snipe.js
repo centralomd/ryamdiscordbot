@@ -17,7 +17,7 @@ module.exports = {
         }
 
         const snipedmg = ["blank shot.", "95 damage.", "105 damage.", "127 damage.", "200 damage.", "225 damage.", "315 damage."];
-        const snipedmgres = Math.floor((Math.random() * sniperdmg.length));
+        const snipedmgres = Math.floor((Math.random() * snipedmg.length));
 
         const snipehit = new Discord.MessageEmbed()
             .setColor('#1CE300')
