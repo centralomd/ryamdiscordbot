@@ -67,8 +67,7 @@ module.exports = {
 			.setDescription(`Help Command List (Admin Included) has been sent to your DMs, ${message.author}!`)
 		
 		if (message.member.hasPermission('ADMINISTRATOR')) {
-			const emoji = message.guild.emojis.cache.find(emoji => emoji.name === 'question');
-			message.react(emoji)
+			message.react('❓');
 			message.channel.send(helpsenddmsuccess)
 			message.author.send(adminhelpembed);
 		}else message.channel.send(helpembed);
