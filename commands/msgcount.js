@@ -8,7 +8,7 @@ module.exports = {
     description: 'COMMAND IS BEING TESTED!',
     cooldown: 5,
 	execute(message, args) {
-        client.on('event', async (first, last) => {
+        async function declaredAsAsync() {
         await message.channel.send('Send two messages and I\'ll tell you how far apart you sent them.');
         const messages = await message.channel.awaitMessages(m => m.author.id === message.author.id, {
 	        max: 2,
@@ -20,6 +20,6 @@ module.exports = {
         const formatted = ms(difference);
 
         message.channel.send(`You sent the two messages ${formatted} apart.`);
-        });
+        };
     },
 };
