@@ -97,7 +97,8 @@ module.exports = {
 			.catch(collected => {
 				message.channel.send(helpcancelled);
 		});
-				}else message.react('❓').then(() => message.react('❌'));
+			}
+			if (!message.member.hasPermission('ADMINISTRATOR')) { message.react('❓').then(() => message.react('❌'));
 				const filternoadmin = (reaction, user) => {
 				return ['❓', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
 			};
@@ -116,5 +117,6 @@ module.exports = {
 					.catch(collected => {
 						message.channel.send(helpcancelled);
 				});
+		}
 	},
 };
