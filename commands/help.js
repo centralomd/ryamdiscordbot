@@ -61,8 +61,8 @@ module.exports = {
 
 		const helpsenddmsuccess = new Discord.MessageEmbed()
 			.setColor('#1CE300')
-			.setTitle(`Command Sent, ${message.author}!`)
-			.setDescription('Help Command List (Admin Included) has been sent to your DMs!')
+			.setTitle(`Command Sent!`)
+			.setDescription(`Help Command List (Admin Included) has been sent to your DMs, ${message.author}!`)
 		
 		if (message.member.hasPermission('ADMINISTRATOR')) {
 			message.channel.send(helpsenddmsuccess)
