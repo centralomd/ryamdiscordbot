@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const {Client, Attachment, MessageEmbed} = require('discord.js');
+const bot = new Client();
 
 module.exports = {
 	name: 'help',
@@ -56,9 +58,15 @@ module.exports = {
 				{ name: '**Coming Soon!**', value: 'Apparently we are unable to create a music bot. We will add other features like the fun commands. Stay tuned.'},
 			)
 			.setFooter('Ryam v1b • Help Menu')
+
+		const helpsenddmsuccess = new Discord.MessageEmbed()
+			.setColor('#1CE300')
+			.setTitle(`Command Sent, ${message.author}!`)
+			.setDescription('Help Command List (Admin Included) has been sent to your DMs!')
 		
-		if (message.member.hasPermission('ADMINISTRATOR')) {
-			message.channel.send(adminhelpembed)
-		}else message.channel.send(helpembed)
+		if (messagemember.hasPermission('ADMINISTRATOR')) {
+			message.channel.send(helpsenddmsuccess)
+			message.author.send(adminhelpembed);
+		}else message.channel.send(helpembed);
 	},
 };
