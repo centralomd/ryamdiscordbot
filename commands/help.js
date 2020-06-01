@@ -63,7 +63,8 @@ module.exports = {
 
 		const helpsenddmsuccess = new Discord.MessageEmbed()
 			.setColor('#1CE300')
-			.setTitle(`Verified Admin :tick: - Sent in DMs!`)
+			.setAuthor(':tick:')
+			.setTitle(`Verified Admin - Sent in DMs!`)
 			.setDescription(`Help Command List (Admin Included) has been sent to your DMs, ${message.author}!`)
 		
 		if (message.member.hasPermission('ADMINISTRATOR')) {
