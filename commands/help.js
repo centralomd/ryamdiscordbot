@@ -66,6 +66,11 @@ module.exports = {
 			.setTitle(`Verified Admin - Sent in DMs!`)
 			.setDescription(`Help Command List (Admin Included) has been sent to your DMs, ${message.author}!`)
 
+		const helpsenddmsuccessori = new Discord.MessageEmbed()
+			.setColor('#1CE300')
+			.setTitle(`Sent in DMs!`)
+			.setDescription(`Help Command List has been sent to your DMs, ${message.author}!`)
+
 		const helpcancelled = new Discord.MessageEmbed()
 				.setColor('#FC712C')
 				.setTitle('Cancelled.')
@@ -102,7 +107,8 @@ module.exports = {
 						const reaction = collected.first();
 		
 						if (reaction.emoji.name === '❓') {
-							message.channel.send(helpembed);
+							message.channel.send(helpsenddmsuccessori)
+							message.author.send(helpembed);
 						} else {
 							message.channel.send(helpcancelled);
 				}
