@@ -7,9 +7,9 @@ module.exports = {
     guildOnly: true,
 	execute(message, args) {
 		const yeeterror = new Discord.MessageEmbed()
-                .setColor('#E81515')
-                .setTitle('MENTION UNDEFINED')
-                .setDescription('You did not mention anyone.')
+                .setColor('#FC712C')
+                .setTitle('please yeet myself')
+                .setDescription('Nobody to yeet? Try mentioning yourself, or mention someone to yeet!')
         if (!message.mentions.users.size) {
             return message.channel.send(yeeterror);
         }

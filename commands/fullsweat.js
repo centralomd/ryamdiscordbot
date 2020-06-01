@@ -6,7 +6,7 @@ module.exports = {
     cooldown: 3,
 	execute(message, args) {
         const fullsweaterr = new Discord.MessageEmbed()
-                .setColor('#E81515')
+                .setColor('#FC712C')
                 .setTitle('Creative is down :cry:')
                 .setDescription('You can\'t sweat on yourself, bruh. Mention someone!')
         if (!message.mentions.users.size) {
@@ -23,7 +23,7 @@ module.exports = {
             .setDescription(`${message.author} tried to sweat hard on **${taggedUser.username}**, but instead ${message.author} got 200 pumped.`)
 
         const sweatsuccess = new Discord.MessageEmbed()
-            .setColor('#E96A00')
+            .setColor('#1CE300')
             .setTitle('Elimination!')
             .setDescription(`${message.author} eliminated **${taggedUser.username}** after sweating hard and wasted ` + sweatbuild[sweatbuildres])
 

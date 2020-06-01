@@ -9,7 +9,7 @@ module.exports = {
         const taggedUser = message.mentions.users.first();
     //answer
         const pumpundefined = new Discord.MessageEmbed()
-                .setColor('#1CE300')
+                .setColor('#FC712C')
                 .setTitle('PEW!')
                 .setDescription(`${message.author} shot the air for 0 damage!`)
         if (!message.mentions.users.size) {
