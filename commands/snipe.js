@@ -29,22 +29,7 @@ module.exports = {
             .setTitle('D-DAR!')
             .setDescription(`${message.author} attempetd to snipe, but slipped over and **${taggedUser.username}** hit them instead with ` + snipedmg[snipedmgres])
 
-        const snipehit2 = new Discord.MessageEmbed()
-            .setColor('#1CE300')
-            .setTitle('DAR!')
-            .setDescription(`${message.author} sniped **${taggedUser.username}** for ` + snipedmg[snipedmgres])  
-        
-        const snipehit3 = new Discord.MessageEmbed()
-            .setColor('#1CE300')
-            .setTitle('DAR!')
-            .setDescription(`${message.author} sniped **${taggedUser.username}** for ` + snipedmg[snipedmgres])
-
-        const snipehit4 = new Discord.MessageEmbed()
-            .setColor('#1CE300')
-            .setTitle('DAR!')
-            .setDescription(`${message.author} sniped **${taggedUser.username}** for ` + snipedmg[snipedmgres])
-            
-        const snipedmgormiss = [snipehit, snipehit2, snipehit3, snipehit4, snipemiss]
+        const snipedmgormiss = [snipehit, snipemiss]
         const snipedmgormissres = Math.floor((Math.random() * snipedmgormiss.length));
 
         message.channel.send(snipedmgormiss[snipedmgormissres])
