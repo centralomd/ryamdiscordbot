@@ -65,11 +65,50 @@ module.exports = {
 			.setColor('#1CE300')
 			.setTitle(`Verified Admin - Sent in DMs!`)
 			.setDescription(`Help Command List (Admin Included) has been sent to your DMs, ${message.author}!`)
+
+		const helpcancelled = new Discord.MessageEmbed()
+				.setColor('#FC712C')
+				.setTitle('Cancelled.')
+				.setDescription('You either didn\'t respond or pressed ❌.')
 		
 		if (message.member.hasPermission('ADMINISTRATOR')) {
-			message.react('❓');
-			message.channel.send(helpsenddmsuccess)
-			message.author.send(adminhelpembed);
-		}else message.channel.send(helpembed);
+			message.react('👍').then(() => message.react('👎'));
+
+		const filter = (reaction, user) => {
+			return ['❓', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+	};
+
+		message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+			.then(collected => {
+				const reaction = collected.first();
+
+				if (reaction.emoji.name === '❓') {
+					message.channel.send(helpsenddmsuccess)
+					message.author.send(adminhelpembed);
+				} else {
+					message.channel.send(helpcancelled);
+		}
+	})
+			.catch(collected => {
+				message.channel.send(helpcancelled);
+		});
+				}else 
+				const filter = (reaction, user) => {
+				return ['❓', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+			};
+		
+				message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+					.then(collected => {
+						const reaction = collected.first();
+		
+						if (reaction.emoji.name === '❓') {
+							message.channel.send(helpembed);
+						} else {
+							message.channel.send(helpcancelled);
+				}
+			})
+					.catch(collected => {
+						message.channel.send(helpcancelled);
+				});
 	},
 };
