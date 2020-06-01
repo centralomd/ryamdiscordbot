@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const ms = require('ms');
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
 
 module.exports = {
     name: 'msgcount',
