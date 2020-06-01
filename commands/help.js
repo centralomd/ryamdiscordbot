@@ -64,7 +64,7 @@ module.exports = {
 			.setTitle(`Command Sent, ${message.author}!`)
 			.setDescription('Help Command List (Admin Included) has been sent to your DMs!')
 		
-		if (messagemember.hasPermission('ADMINISTRATOR')) {
+		if (message.member.hasPermission('ADMINISTRATOR')) {
 			message.channel.send(helpsenddmsuccess)
 			message.author.send(adminhelpembed);
 		}else message.channel.send(helpembed);
