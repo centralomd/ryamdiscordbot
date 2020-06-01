@@ -25,6 +25,7 @@ module.exports = {
 				{ name: '**r!gn**', value: 'Says goodnight to the mentioned user. Respect them.'},
 				{ name: '**r!pump**', value: 'Shoot a pump to mentioned user and see how many you damaged them.'},
 				{ name: '**r!snipe**', value: 'Snipe those scared kids and see how much you damaged them.'},
+				{ name: '**r!fullsweat**', value: 'Full sweat on a mentioned user and see what you did.'},
 				{ name: '‎', value: '‎'},
 				{ name: '**Admin Commands**', value: '‎'},
 				{ name: '**PERMISSION UNVERIFIED!**', value: 'You are only able to view this part if you have "ADMINISTRATOR" permission.' },
@@ -48,6 +49,7 @@ module.exports = {
 				{ name: '**r!gn**', value: 'Says goodnight to the mentioned user. Respect them.'},
 				{ name: '**r!pump**', value: 'Shoot a pump to mentioned user and see how many you damaged them.'},
 				{ name: '**r!snipe**', value: 'Snipe those scared kids and see how much you damaged them.'},
+				{ name: '**r!fullsweat**', value: 'Full sweat on a mentioned user and see what you did.'},
 				{ name: '‎', value: '‎'},
 				{ name: '**Admin Commands (You are verified an admin)**', value: '‎'},
 				{ name: '**r!ping**', value: 'Test command.' },
@@ -61,7 +63,7 @@ module.exports = {
 
 		const helpsenddmsuccess = new Discord.MessageEmbed()
 			.setColor('#1CE300')
-			.setTitle(`Command Sent!`)
+			.setTitle(`Verified Admin :tick: - Sent in DMs!`)
 			.setDescription(`Help Command List (Admin Included) has been sent to your DMs, ${message.author}!`)
 		
 		if (message.member.hasPermission('ADMINISTRATOR')) {
