@@ -14,5 +14,6 @@ name: 'invite',
             .setTitle('Join our Discord Server!')
             .setDescription('Press (or click) the title to join server. pls join :pleading_face:')
         message.channel.send(inviteembed)
+         message.channel.send(joinserverad);
     },
 };
