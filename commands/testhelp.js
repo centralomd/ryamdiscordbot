@@ -5,10 +5,18 @@ module.exports = {
     description: 'testhelp',
     cooldown: 1,
 	execute(message, args) {
-        const messageid = args.slice(1).join(" ");
+        
+        const channelid = args.slice(1).join(" ");
+        const messageid = args.slice(2).join(" ");
 
-        if (message.id === messageid) {
-            message.react('😄');
-        }
+        var channel = guild.channels.get(channelid)
+
+        .message.channel.fetchMessage(messageid)
+        .then((message) => {
+
+        message.react("👍")
+
+        })
+        
     },
 };
