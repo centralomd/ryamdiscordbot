@@ -9,7 +9,7 @@ module.exports = {
         const channelid = args.slice(1).join(" ");
         const messageid = args.slice(2).join(" ");
 
-        var channel = guild.channels.get(channelid)
+        var channel = message.guild.channels.get(channelid)
 
         .message.channel.fetchMessage(messageid)
         .then((message) => {
