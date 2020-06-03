@@ -6,7 +6,6 @@ module.exports = {
     cooldown: 1,
 	execute(message, args) {
         const channel = message.guild.channels.find('name', 'testhelp');
-        const args = message.content.slice(12).trim().split(/ +/g);
         let suggestion = args.slice(0).join(" ");
         if (!channel) return;
 
