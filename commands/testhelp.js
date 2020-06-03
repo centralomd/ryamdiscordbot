@@ -5,18 +5,18 @@ module.exports = {
     description: 'testhelp',
     cooldown: 1,
 	execute(message, args) {
-        
-        const channelid = args.slice(1).join(" ");
-        const messageid = args.slice(2).join(" ");
+        const channel = message.guild.channels.find('name', 'testhelp');
+        const args = message.content.slice(12).trim().split(/ +/g);
+        let suggestion = args.slice(0).join(" ");
+        if (!channel) return;
 
-        var channel = message.guild.channels.get(channelid)
+        const embed = new Discord.MessageEmbed()
+            .setTitle('Test')
+            .setDescription('Test')
 
-        .message.channel.fetchMessage(messageid)
-        .then((message) => {
-
-        message.react("👍")
-
+        channel.send(embed).then(sentEmbed => {
+            sentEmbed.react("👍")
+            sentEmbed.react("👎")
         })
-        
     },
 };
