@@ -7,7 +7,7 @@ module.exports = {
 	execute(message, args) {
         const messageid = args.slice(1).join(" ")
 
-        textChannel.messages.fetch(messageid).then(message => {
+        message.channel.fetch(messageid).then(message => {
             message.react('👍')
         })
     },
