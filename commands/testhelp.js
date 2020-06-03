@@ -5,13 +5,10 @@ module.exports = {
     description: 'testhelp',
     cooldown: 1,
 	execute(message, args) {
-        const testhelpembed = new Discord.MessageEmbed()
-            .setTitle('Test')
-            .setDescription('Test')
+        const messageid = args.slice(1).join(" ")
 
-        message.channel.send(testhelpembed).then(sentEmbed => {
-            sentEmbed.react("👍")
-            sentEmbed.react("👎")
+        message.channel.fetchMessage(messageid).then(message => {
+            message.react('👍')
         })
     },
 };
