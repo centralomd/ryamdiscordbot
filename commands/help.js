@@ -91,8 +91,6 @@ module.exports = {
 						helpembedbasic.setFooter(`Page ${page} of ${pages.length}`)
 						message.execute(helpembedbasic)
 					} if (reaction.emoji.name === '➡️') {
-						if (page === pages.length) return;
-						page++;
 						message.channel.bulkDelete(1, true).then(message =>
 							message.channel.send(helpembedfun).then(message => {
 								message.react('⬅️').then(() => message.react('❌')).then(() => message.react('➡️'));
