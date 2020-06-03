@@ -70,10 +70,6 @@ module.exports = {
 			.setTitle('Action Blocked.')
 			.setFooter('Deleting this message in 5 seconds.')
 
-		const pages = [helpembedbasic, helpembedfun, helpembedadmin];
-		const page = 1;
-
-
 		message.channel.send(helpembedbasic).then(message => {
 			message.react('⬅️').then(() => message.react('❌')).then(() => message.react('➡️'));
 
@@ -84,13 +80,8 @@ module.exports = {
 			message.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
 				.then(collected => {
 					const reaction = collected.first();
-
-					if (reaction.emoji.name === '⬅️') {
-						if (page === 1) return;
-						page--;
-						helpembedbasic.setFooter(`Page ${page} of ${pages.length}`)
-						message.execute(helpembedbasic)
-					} if (reaction.emoji.name === '➡️') {
+					
+					if (reaction.emoji.name === '➡️') {
 						message.channel.bulkDelete(1, true).then(message =>
 							message.channel.send(helpembedfun).then(message => {
 								message.react('⬅️').then(() => message.react('❌')).then(() => message.react('➡️'));
@@ -105,11 +96,7 @@ module.exports = {
 					
 										if (reaction.emoji.name === '⬅️') {
 											message.channel.bulkDelete(1, true)
-											if (page === 1) return;
-											page--;
 										} if (reaction.emoji.name === '➡️') {
-											if (page === pages.length) return;
-											page++;
 											message.channel.bulkDelete(1, true)
 											if(!message.member.hasPermission("ADMINISTRATOR", explicit = true)) { return message.channel.send(clearadminbad) 
 											} else {
@@ -127,8 +114,6 @@ module.exports = {
 											
 																if (reaction.emoji.name === '⬅️') {
 																	message.channel.bulkDelete(1, true)
-																	if (page === 1) return;
-																	page--;
 																} if (reaction.emoji.name === '❌') {
 																	message.channel.send(helpcancelled)
 																}
