@@ -75,7 +75,7 @@ module.exports = {
 
 
 		message.channel.send(helpembedbasic).then(message => {
-			message.react('⬅️').then(() => message.react('➡️'));
+			message.react('⬅️').then(() => message.react('❌')).then(() => message.react('➡️'));
 
 			const filter = (reaction, user) => {
 				return ['⬅️', '❌', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
@@ -88,15 +88,68 @@ module.exports = {
 					if (reaction.emoji.name === '⬅️') {
 						if (page === 1) return;
 						page--;
-						helpembedbasic.setDescription(paegs[page-1]);
 						helpembedbasic.setFooter(`Page ${page} of ${pages.length}`)
-						message.edit(helpembedbasic)
+						message.execute(helpembedbasic)
 					} if (reaction.emoji.name === '➡️') {
 						if (page === pages.length) return;
 						page++;
-						helpembedbasic.setDescription(paegs[page-1]);
-						helpembedbasic.setFooter(`Page ${page} of ${pages.length}`)
-						message.edit(helpembedbasic)
+						message.channel.bulkDelete(1, true).then(message =>
+							message.channel.send(helpembedfun).then(message => {
+								message.react('⬅️').then(() => message.react('❌')).then(() => message.react('➡️'));
+					
+								const filter = (reaction, user) => {
+									return ['⬅️', '❌', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id;
+								};
+					
+								message.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
+									.then(collected => {
+										const reaction = collected.first();
+					
+										if (reaction.emoji.name === '⬅️') {
+											message.channel.bulkDelete(1, true)
+											if (page === 1) return;
+											page--;
+										} if (reaction.emoji.name === '➡️') {
+											if (page === pages.length) return;
+											page++;
+											message.channel.bulkDelete(1, true)
+											if(!message.member.hasPermission("ADMINISTRATOR", explicit = true)) { return message.channel.send(clearadminbad) 
+											} else {
+												message.channel.bulkDelete(1, true).then(message =>
+													message.channel.send(helpembedadmin).then(message => {
+														message.react('⬅️').then(() => message.react('❌')).then(() => message.react('➡️'));
+											
+														const filter = (reaction, user) => {
+															return ['⬅️', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+														};
+											
+														message.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
+															.then(collected => {
+																const reaction = collected.first();
+											
+																if (reaction.emoji.name === '⬅️') {
+																	message.channel.bulkDelete(1, true)
+																	if (page === 1) return;
+																	page--;
+																} if (reaction.emoji.name === '❌') {
+																	message.channel.send(helpcancelled)
+																}
+													})
+															.catch(collected => {
+																message.channel.send(helpnoresponse);
+													});
+												})
+												)
+											}
+										} if (reaction.emoji.name === '❌') {
+											message.channel.send(helpcancelled)
+										}
+							})
+									.catch(collected => {
+										message.channel.send(helpnoresponse);
+							});
+						})
+						)
 					} if (reaction.emoji.name === '❌') {
 						message.channel.send(helpcancelled)
 					}
