@@ -8,7 +8,7 @@ module.exports = {
         const messageid = args.slice(1).join(" ")
 
         message.channel.fetch(messageid).then(message => {
-            message.react('👍')
+            message.react('❓').then(() => message.react('❌'));
         })
     },
 };
