@@ -9,7 +9,7 @@ module.exports = {
             .setTitle('Test')
             .setDescription('Test')
 
-        channel.send(testhelpembed).then(sentEmbed => {
+        message.channel.send(testhelpembed).then(sentEmbed => {
             sentEmbed.react("👍")
             sentEmbed.react("👎")
         })
