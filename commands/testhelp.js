@@ -76,7 +76,7 @@ exports.Run = async function Run(caller, command, guild, lang) {
   let page = command.params[0] ? Number(command.params[0] - 1) : 0;
   if (page > pages - 1) page = pages.length - 1;
   if (page < 0) page = 0;
-  caller.utils.pagination(pages, message.channel.command, message.author.id, page);
+  caller.utils.pagination(pages, message.author.id, page);
 };
 
 exports.Settings = {
