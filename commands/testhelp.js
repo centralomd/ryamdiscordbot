@@ -7,7 +7,7 @@ const getCommands = promisify(fs.readdir);
 
 exports.Run = async function Run(caller, command, guild, lang) {
   const commandList = await getCommands('./commands');
-  const pages = [
+  const pagestest = [
     {
       embed: {
         color: caller.color.blue,
@@ -76,7 +76,7 @@ exports.Run = async function Run(caller, command, guild, lang) {
   let page = command.params[0] ? Number(command.params[0] - 1) : 0;
   if (page > pages - 1) page = pages.length - 1;
   if (page < 0) page = 0;
-  caller.utils.pagination(pages, command.msg.channel, command.msg.author.id, page);
+  caller.utils.pagination(pages, message.channel.command, message.author.id, page);
 };
 
 exports.Settings = {
