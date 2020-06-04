@@ -13,7 +13,7 @@ module.exports = {
     if(!args[0]) return message.channel.send(failargs);
     if(!args[1]) return message.channel.send(failargs);
 
-    let messageselect = args.slice(1).join(" ");
+    const messageselect = args.slice(1).join(" ");
 
   message.channel.cache.fetchMessage(messageselect).then(message => {
     message.react(args[0]) //This is assuming that you are splitting the message content into an array, So it will get the first element.
