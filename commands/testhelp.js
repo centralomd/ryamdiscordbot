@@ -3,8 +3,6 @@ const Discord = require('discord.js');
 module.exports = {
 	name: 'testhelp',
 	description: 'List all the available commands test.',
-	aliases: ['commandtest'],
-	usage: '[command name test]',
 	cooldown: 2,
 	execute(message, args) {
 
