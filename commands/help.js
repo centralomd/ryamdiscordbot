@@ -76,12 +76,6 @@ module.exports = {
 			.setTitle('Action Blocked.')
 			.setFooter('Deleting this message in 5 seconds.')
 
-			pages.forEach((obj, page) => {
-				pages[page].embed.fields.push({
-				  name: lang.help.title,
-				  value: lang.help.links.join('\n'),
-				});
-			  });
 			  let page = command.params[0] ? Number(command.params[0] - 1) : 0;
 			  if (page > pages - 1) page = pages.length - 1;
 			  if (page < 0) page = 0;
