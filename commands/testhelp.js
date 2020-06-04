@@ -11,7 +11,7 @@ module.exports = {
     const failargs = new Discord.MessageEmbed()
       .setTitle('no args 0 or 1')
 
-    if(!args[0] && !args[1]) return 
+    if(!args[0] && !args[1]) return message.channel.send(failargs);
 
     let messageselect = args.slice(1).join(" ");
 
