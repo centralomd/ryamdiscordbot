@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
 
 module.exports = {
-	name: 'help',
-	description: 'List all the available commands.',
-	aliases: ['commands'],
-	usage: '[command name]',
-	cooldown: 10,
+	name: 'testhelp',
+	description: 'List all the available commands test.',
+	aliases: ['commandtest'],
+	usage: '[command name test]',
+	cooldown: 2,
 	execute(message, args) {
 
     const failargs = new Discord.MessageEmbed()

@@ -1,6 +1,10 @@
 const Discord = require('discord.js');
 const {Client, Attachment, MessageEmbed} = require('discord.js');
 const bot = new Client();
+const fs = require('fs');
+const { promisify } = require('util');
+
+const getCommands = promisify(fs.readdir);
 
 module.exports = {
 	name: 'help',
