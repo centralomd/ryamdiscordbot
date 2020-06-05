@@ -16,7 +16,7 @@ module.exports = {
 
     const messageselect = args.slice(1).join(" ");
 
-  client.channel.get(messageselect).messages.cache.first(50).then(message => {
+    client.messages.cache.get('718123247081750599').then(message => {
     message.react(args[0]) //This is assuming that you are splitting the message content into an array, So it will get the first element.
   })
 
