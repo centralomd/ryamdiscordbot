@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const ytdl = require('ytdl-core');
 const { ErelaClient, Utils } = require("erela.js")
-const { nodes } = require("/botconfig.json")
+const { nodes } = require("botconfig.json")
 
 var servers = {};
 
@@ -87,7 +87,8 @@ if (command.guildOnly && message.channel.type !== 'text') {
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     try {
-	    command.execute(message, args);
+        command.execute(message, args);
+        command.execute(message)
     } catch (error) {
 	    console.error(error);
 	    message.channel.send(errorcommand);
