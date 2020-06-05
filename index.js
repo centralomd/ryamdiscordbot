@@ -24,16 +24,16 @@ client.once('ready', () => {
     client.user.setActivity('r!help', { type: 'LISTENING'}).catch(console.error);
 })
 
-    client.music = new ErelaClient(bot, nodes)
+    client.music = new ErelaClient(client, nodes)
         .on("nodeError", console.log)
         .on("nodeConnect", () => console.log("Successfully created a new Node."))
         .on("queueEnd", player => {
             player.textChannel.send("Queue has ended.")
-            return bot.music.players.destroy(player.guild.id)
+            return client.music.players.destroy(player.guild.id)
         })
         .on("trackStart", ({textChannel}, {title, duration}) => textChannel.send(`Now playing: **${title}** \`${Utils.formatTime(duration, true)}\``).then(m => m.delete(15000)))
 
-        bot.levels = new Map()
+        client.levels = new Map()
         .set("none", 0.0)
         .set("low", 0.10)
         .set("medium", 0.15)
