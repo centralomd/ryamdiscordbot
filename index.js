@@ -24,7 +24,7 @@ client.once('ready', () => {
     client.user.setActivity('r!help', { type: 'LISTENING'}).catch(console.error);
 })
 
-    bot.music = new ErelaClient(bot, nodes)
+    client.music = new ErelaClient(bot, nodes)
         .on("nodeError", console.log)
         .on("nodeConnect", () => console.log("Successfully created a new Node."))
         .on("queueEnd", player => {
