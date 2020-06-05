@@ -2,8 +2,8 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const ytdl = require('ytdl-core');
-const { ErelaClient, Utils } = require("erela.js")
-const { nodes } = require("botconfig.json")
+const { ErelaClient, Utils } = require('erela.js')
+const { nodes } = require('./botconfig.json')
 
 var servers = {};
 
