@@ -7,11 +7,7 @@ module.exports = {
 	execute(message, args) {
         message.delete()
         if(message.author.bot) return;
-        let saymsg = message.content
+        const saymsg = message.content
                 message.channel.send(saymsg.replace("r!say",""))
-                .then(msg => {
-                    msg.delete()
-                })
-        
     },
 };
