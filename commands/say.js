@@ -5,8 +5,8 @@ module.exports = {
     description: 'Repeats a word the message author said.',
     cooldown: 5,
 	execute(message, args) {
-        m => m.delete(1)
-        const usermsg = message.content
-        message.channel.send(usermsg)
+        let saymsg = message.content
+                message.channel.send(saymsg.replace("r!say",""))
+                message.delete(1)
     },
 };
