@@ -6,16 +6,16 @@ const ytdl = require('ytdl-core');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-module.exports = { 
-    config: {
+module.exports = {
         name: "play",
         description: "Play a song/playlist or search for a song from youtube",
         usage: "<input>",
         category: "music",
+        cooldown: 30,
         accessableby: "Member",
-        aliases: ["p", "pplay"]
-    },
-    run: async (client, message, args) => {
+        aliases: ["p", "pplay"],
+        execute(message, args) {
+    
         const { voiceChannel } = message.member;
         if (!voiceChannel) return message.channel.send("You need to be in a voice channel to play music.");
 
@@ -75,5 +75,5 @@ module.exports = {
                     break;
             }
         }).catch(err => message.channel.send(err.message))
-    }
-}
+    },
+};
