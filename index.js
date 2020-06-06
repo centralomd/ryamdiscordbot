@@ -3,7 +3,6 @@ const Discord = require('discord.js');
 const { prefix, token } = require('./config.json');
 const ytdl = require('ytdl-core');
 const { ErelaClient, Utils } = require('erela.js')
-const { nodes } = require('./botconfig.json')
 
 var servers = {};
 
@@ -23,11 +22,16 @@ client.once('ready', () => {
     console.log('Ryam bot is now online and running!')
     client.user.setActivity('r!help', { type: 'LISTENING'}).catch(console.error);
 })
-
-    client.music = new ErelaClient(client, nodes)
-    .on("nodeError", console.log)
-    .on("nodeConnect", () => console.log("Successfully created a new Node."))
-    .on("queueEnd", player => {
+    client.music = new ErelaClient(client, [
+        {
+            host: process.env.HOST,
+            port: process.env.PORT,
+            password: process.env.PASSWORD
+        }
+    ], {"userID": message.author.id})
+        .on("nodeError", console.log)
+        .on("nodeConnect", () => console.log("Successfully created a new Node."))
+        .on("queueEnd", player => {
         player.textChannel.send("Queue has ended.")
         return client.music.players.destroy(player.guild.id)
     })
