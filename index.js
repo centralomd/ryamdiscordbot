@@ -22,6 +22,7 @@ client.once('ready', () => {
     console.log('Ryam bot is now online and running!')
     client.user.setActivity('r!help', { type: 'LISTENING'}).catch(console.error);
 })
+    function userInfo(user, message){
     client.music = new ErelaClient(client, [
         {
             host: process.env.HOST,
@@ -42,6 +43,7 @@ client.once('ready', () => {
     .set("low", 0.10)
     .set("medium", 0.15)
     .set("high", 0.25);
+}
 
 client.on('message', message=>{
 if (!message.content.startsWith(prefix) || message.author.bot) return;
