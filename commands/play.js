@@ -1,5 +1,10 @@
 const { Utils } = require("erela.js")
-const { RichEmbed } = require("discord.js")
+const fs = require('fs');
+const Discord = require('discord.js');
+const ytdl = require('ytdl-core');
+
+const client = new Discord.Client();
+client.commands = new Discord.Collection();
 
 module.exports = { 
     config: {
@@ -10,23 +15,23 @@ module.exports = {
         accessableby: "Member",
         aliases: ["p", "pplay"]
     },
-    run: async (bot, message, args) => {
+    run: async (client, message, args) => {
         const { voiceChannel } = message.member;
         if (!voiceChannel) return message.channel.send("You need to be in a voice channel to play music.");
 
-        const permissions = voiceChannel.permissionsFor(bot.user);
+        const permissions = voiceChannel.permissionsFor(client.user);
         if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
         if (!permissions.has("SPEAK")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
 
         if (!args[0]) return message.channel.send("Please provide a song name or link to search.");
 
-        const player = bot.music.players.spawn({
+        const player = client.music.players.spawn({
             guild: message.guild,
             textChannel: message.channel,
             voiceChannel
         });
 
-        bot.music.search(args.join(" "), message.author).then(async res => {
+        client.music.search(args.join(" "), message.author).then(async res => {
             switch (res.loadType) {
                 case "TRACK_LOADED":
                     player.queue.add(res.tracks[0]);
@@ -37,7 +42,7 @@ module.exports = {
                 case "SEARCH_RESULT":
                     let index = 1;
                     const tracks = res.tracks.slice(0, 5);
-                    const musicselection = new RichEmbed()
+                    const musicselection = new Discord.MessageEmbed()
                         .setAuthor("Song Selection.", message.author.displayAvatarURL)
                         .setDescription(tracks.map(video => `**${index++} -** ${video.title}`))
                         .setFooter("Your response time closes within the next 30 seconds. Type 'cancel' to cancel the selection");
