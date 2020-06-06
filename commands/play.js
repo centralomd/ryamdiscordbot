@@ -15,6 +15,12 @@ module.exports = {
         accessableby: "Member",
         aliases: ["p", "pplay"],
         execute(message, args) {
+            client.on('message', async message => {
+                // Join the same voice channel of the author of the message
+                if (message.member.voice.channel) {
+                    const connection = await message.member.voice.channel.join();
+                }
+            });
     
         const { voiceChannel } = message.member;
         if (!voiceChannel) return message.channel.send("You need to be in a voice channel to play music.");
