@@ -15,14 +15,11 @@ module.exports = {
         accessableby: "Member",
         aliases: ["p", "pplay"],
         execute(message, args) {
-            client.on('message', async message => {
                 if (message.member.voice.channel) {
                     const connection = await message.member.voice.channel.join();
                 }
-            });
-    
-        const { voiceChannel } = message.member.voice.channel;
-        if (!voiceChannel) return message.channel.send("You need to be in a voice channel to play music.");
+
+        if (!message.guild.voice.connection) return message.channel.send("You need to be in a voice channel to play music.");
 
         const permissions = voiceChannel.permissionsFor(client.user);
         if (!permissions.has("CONNECT")) return message.channel.send("I cannot connect to your voice channel, make sure I have permission to!");
