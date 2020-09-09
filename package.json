@@ -1,0 +1,27 @@
+{
+  "name": "ryamdiscordbot",
+  "version": "1.0.0",
+  "description": "music bot",
+  "main": "ryam.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centralomd/ryamdiscordbot.git"
+  },
+  "author": "centralomd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/centralomd/ryamdiscordbot/issues"
+  },
+  "homepage": "https://github.com/centralomd/ryamdiscordbot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.3.2",
+    "discord-youtube-api": "^0.1.0",
+    "discord.js": "^12.3.1",
+    "ffmpeg": "0.0.4",
+    "sodium": "^3.0.2",
+    "ytdl-core": "^3.2.2"
+  }
+}
