@@ -10,7 +10,6 @@ module.exports = {
 		if (!serverQueue) return message.channel.send('There is nothing playing that I could stop for you.');
 
 		serverQueue.connection.dispatcher.end('Stop command has been used!');
-    serverQueue.songs = [];
 
     const stopEmbed = new Discord.MessageEmbed()
       .setColor('#FF98FD')
@@ -25,5 +24,6 @@ module.exports = {
       
       serverQueue.voiceChannel.leave();
       message.channel.send(stopEmbed);
+      if (queue) return queue.delete(message.guild.id);
 	}
 };
