@@ -23,19 +23,18 @@ const status = [
 ];
 
 const Enmap = require('enmap');
-client.settings = new Enmap({
+const looping = new Enmap({
   name: "looping",
   fetchAll: false,
   autoFetch: true,
   cloneLevel: 'deep'
 });
 
-// when the client is ready, run this code
-// this event will only trigger one time after logging in
+
 client.once('ready', () => {
     looping.defer.then( () => {
     console.log(looping.size + " looping datas loaded.");
-    looping.set(`Looping: Off - Guild: Undefined`, true); // works
+    looping.set('Undefined', true);
     });
 
 	    console.log(`${client.user.username} is online and running! With:\n Username: ${client.user.username}`)
