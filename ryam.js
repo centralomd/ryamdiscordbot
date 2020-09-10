@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const prefix = 'r?'
 const queue = new Map();
+const { getLyrics, getSong } = require('genius-lyrics-api');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -13,10 +14,36 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
+const status = [
+    "with bread", 
+    "with centralomd", 
+    "Music", 
+    "Internal Spotify", 
+    "in the VC"
+];
+
+const Enmap = require('enmap');
+client.settings = new Enmap({
+  name: "looping",
+  fetchAll: false,
+  autoFetch: true,
+  cloneLevel: 'deep'
+});
+
 // when the client is ready, run this code
 // this event will only trigger one time after logging in
 client.once('ready', () => {
-	console.log('Ready!');
+    looping.defer.then( () => {
+    console.log(looping.size + " looping datas loaded.");
+    looping.set(`Looping: Off - Guild: Undefined`, true); // works
+    });
+
+	    console.log(`${client.user.username} is online and running! With:\n Username: ${client.user.username}`)
+
+    setInterval(() => {
+        const statuses = Math.floor(Math.random() * (status.length - 1) + 1);
+        client.user.setPresence({ activity: { name: `${status[statuses]} | r?help`, type: "PLAYING" }, status: 'idle' })
+    }, 60000);
 });
 
 client.on('message', message => {
@@ -27,12 +54,15 @@ client.on('message', message => {
     
     if (!client.commands.has(commandName)) return;
 
-    const command = client.commands.get(commandName);
+	const command = client.commands.get(commandName)
+		|| client.commands.find(command => command.aliases && command.aliases.includes(commandName));
+
+    if (!command) return;
 
     if (command.args && !args.length) {
         return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
     }
-    if (command.guildOnly && message.channel.type === 'dm') {
+    if (message.channel.type === 'dm') {
         return message.reply('I can\'t execute that command inside DMs!');
     }
 
@@ -44,5 +74,11 @@ client.on('message', message => {
     }
 });
 
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('ok');
+});
+server.listen(3000);
 // login to Discord with your app's token
 client.login(process.env.DISCORD_TOKEN);

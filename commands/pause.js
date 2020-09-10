@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'pause',
 	description: 'Pause command.',
+  aliases: ['ps', 'pa', 'pau', 'paus', 'pp'],
 	async execute(message, args, Discord, client, queue) {
 		const serverQueue = queue.get(message.guild.id);
 		if (serverQueue && serverQueue.playing) {
@@ -9,7 +10,7 @@ module.exports = {
             
             const pausedEmbed = new Discord.MessageEmbed()
             .setColor('#FF98FD')
-            .setAuthor(`Queue • ${message.author.username}`, message.author.avatarURL())
+            .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
             .setTitle(`⏸ ${message.guild.name}: Paused!`)
             .addFields(
                 //{ name: `\u200b`, value: `\u200b` },

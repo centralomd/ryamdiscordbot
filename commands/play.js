@@ -8,6 +8,7 @@ const youtube = new YouTube("AIzaSyBdiNbhFfsILnFlRiYpGJ9uOGZCmzB4F88");
 module.exports = {
 	name: 'play',
 	description: 'Play the music.',
+  aliases: ['p', 'pl', 'pla', 'listen'],
 	async execute(message, args, Discord, client, queue) {
     const { channel } = message.member.voice;
 		if (!channel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
@@ -15,16 +16,37 @@ module.exports = {
 		if (!permissions.has('CONNECT')) return message.channel.send('I cannot connect to your voice channel, make sure I have the proper permissions!');
 		if (!permissions.has('SPEAK')) return message.channel.send('I cannot speak in this voice channel, make sure I have the proper permissions!');
 
+    if (!args.length) {
+      const serverQueue = queue.get(message.guild.id);
+		  if (serverQueue && !serverQueue.playing) {
+			  serverQueue.playing = true;
+			  serverQueue.connection.dispatcher.resume();
+
+          const pausedEmbed = new Discord.MessageEmbed()
+            .setColor('#58FC91')
+            .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
+            .setTitle(`▶ ${message.guild.name}: Resumed!`)
+            .addFields(
+                //{ name: `\u200b`, value: `\u200b` },
+                { name: `__Resumed__`, value: `[${serverQueue.songs[0].title}](${serverQueue.songs[0].url})` },
+                { name: `__Requestor__`, value: `${serverQueue.songs[0].requestor}` }
+            )
+            .setFooter('Music System • From centralomd#7083')
+			return message.channel.send(pausedEmbed);
+			return message.channel.send();
+		}
+		return message.channel.send('Please mention a music to play!');
+    }
 
     const serverQueue = queue.get(message.guild.id);
     const video = await youtube.searchVideos(`${args.join(' ')}`);
     const vidURL = video.url;
     const songInfo = await ytdl.getInfo(vidURL.replace(/<(.+)>/g, '$1'));
 		const song = {
-			id: songInfo.videoDetails.video_id,
+			id: songInfo.videoDetails.videoId,
       title: Util.escapeMarkdown(songInfo.videoDetails.title),
       url: songInfo.videoDetails.video_url,
-      requestor: message.author.username
+      requestor: message.author.tag
 		};
 
 		if (serverQueue) {
@@ -32,8 +54,8 @@ module.exports = {
       console.log(serverQueue.songs);
       
       const addQueueEmbed = new Discord.MessageEmbed()
-      .setColor('#1CE300')
-      .setAuthor(`Queue • ${message.author.username}`, message.author.avatarURL())
+      .setColor('#FF98FD')
+      .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
       .setTitle(`✅ ${message.guild.name}: Added to Queue!`)
       .addFields(
           //{ name: `\u200b`, value: `\u200b` },
@@ -59,15 +81,12 @@ module.exports = {
       const curqueue = queue.get(message.guild.id);
       var stopTimer;
 			if (!song) {
+        queue.delete(message.guild.id);
         function leaveChannel() {
           stopTimer = setTimeout(() => {
             curqueue.voiceChannel.leave();
-            curqueue.songs = [];
-            serverQueue.connection.dispatcher.end('No music is left.');
-            return;
           }, 300000);
         }
-        
         leaveChannel();
 			}
 
@@ -76,12 +95,16 @@ module.exports = {
 					curqueue.songs.shift();
 					play(curqueue.songs[0]);
 				})
-				.on('error', error => console.error(error));
+				.on('error', error => {
+          console.error(error)
+          if (error.name === 'UnhandledPromiseRejectionWarning') return;
+        })
+      if (!dispatcher) return;
       dispatcher.setVolumeLogarithmic(curqueue.volume / 5);
-      
+
       const addSongEmbed = new Discord.MessageEmbed()
       .setColor('#1CE300')
-      .setAuthor(`Queue • ${message.author.username}`, message.author.avatarURL())
+      .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
       .setTitle(`🎶 ${message.guild.name}: Playing!`)
       .addFields(
           //{ name: `\u200b`, value: `\u200b` },

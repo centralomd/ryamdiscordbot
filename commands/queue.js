@@ -3,13 +3,25 @@ const Discord = require('discord.js');
 module.exports = {
 	name: 'queue',
 	description: 'Queue command.',
+  aliases: ['q', 'qu', 'que', 'queu', 'list', 'l'],
     async execute(message, args, Discord, client, queue) {
 		const serverQueue = queue.get(message.guild.id);
-        if (!serverQueue) return message.channel.send('There is nothing playing.');
+
+        const noQueue = new Discord.MessageEmbed()
+            .setColor('#E96A00')
+            .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
+            .setTitle(`${message.guild.name}: Queue`)
+            .addFields(
+                { name: `\u200b`, value: `\u200b` },
+                { name: `__Now Playing__`, value: `Nothing is playing! Add some music using \`r?play\`!`},
+                { name: `__Song queue__`, value: `Empty.`}
+            )
+            .setFooter('Music System • From centralomd#7083')
+        if (!serverQueue) return message.channel.send(noQueue);
         
         const queueEmbed = new Discord.MessageEmbed()
             .setColor('#FF98FD')
-            .setAuthor(`Queue • ${message.author.username}`, message.author.avatarURL())
+            .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
             .setTitle(`${message.guild.name}: Queue`)
             .addFields(
                 { name: `\u200b`, value: `\u200b` },

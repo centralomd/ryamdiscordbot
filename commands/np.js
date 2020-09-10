@@ -1,13 +1,14 @@
 module.exports = {
 	name: 'np',
 	description: 'Now playing command.',
+  aliases: ['nowplaying', 'nopl'],
 	async execute(message, args, Discord, client, queue) {
 		const serverQueue = queue.get(message.guild.id);
         if (!serverQueue) return message.channel.send('There is nothing playing.');
         
         const npEmbed = new Discord.MessageEmbed()
         .setColor('#FF98FD')
-        .setAuthor(`Queue • ${message.author.username}`, message.author.avatarURL())
+        .setAuthor(`Queue • ${message.author.tag}`, message.author.avatarURL())
         .setTitle(`${message.guild.name}: Now Playing`)
         .addFields(
             //{ name: `\u200b`, value: `\u200b` },
