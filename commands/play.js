@@ -9,7 +9,7 @@ module.exports = {
 	name: 'play',
 	description: 'Play the music.',
   aliases: ['p', 'pl', 'pla', 'listen'],
-	async execute(message, args, Discord, client, queue) {
+	async execute(message, args, Discord, client, queue, looping) {
     const { channel } = message.member.voice;
 		if (!channel) return message.channel.send('I\'m sorry but you need to be in a voice channel to play music!');
 		const permissions = channel.permissionsFor(message.client.user);
@@ -78,7 +78,11 @@ module.exports = {
 		queueConstruct.songs.push(song);
 
 		const play = async song => {
+      if (!looping.has(message.guild.id)) return looping.set(message.guild.id, false)
+
       const curqueue = queue.get(message.guild.id);
+      const loopCheck = looping.get(message.guild.id);
+      
       var stopTimer;
 			if (!song) {
         if (queue) return queue.delete(message.guild.id);
@@ -90,10 +94,23 @@ module.exports = {
         leaveChannel();
 			}
 
-			const dispatcher = curqueue.connection.play(ytdl(song.url))
+      if (!song.url) console.log('Process: Music URL Error - Error is controlled.');
+      const dispatcher = curqueue.connection.play(ytdl(song.url))
 				.on('finish', () => {
-					curqueue.songs.shift();
-					play(curqueue.songs[0]);
+          var i;
+
+          if (loopCheck === false) {
+            curqueue.songs.shift();
+            play(curqueue.songs[0]);
+          } else {
+            if (i > curqueue.songs.length) {
+              i = 0
+            };
+
+              i = 1
+              play(curqueue.songs[1]);
+              i++;
+          }
 				})
 				.on('error', error => {
           console.error(error)

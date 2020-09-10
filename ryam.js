@@ -53,8 +53,7 @@ client.on('message', message => {
     
     if (!client.commands.has(commandName)) return;
 
-	const command = client.commands.get(commandName)
-		|| client.commands.find(command => command.aliases && command.aliases.includes(commandName));
+	const command = client.commands.get(commandName) || client.commands.find(command => command.aliases && command.aliases.includes(commandName));
 
     if (!command) return;
 
@@ -66,7 +65,7 @@ client.on('message', message => {
     }
 
     try {
-	    command.execute(message, args, Discord, client, queue);
+	    command.execute(message, args, Discord, client, queue, looping);
     } catch (error) {
 	    console.error(error);
 	    message.reply('there was an error trying to execute that command!');
