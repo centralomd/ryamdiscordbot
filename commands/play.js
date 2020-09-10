@@ -81,7 +81,7 @@ module.exports = {
       const curqueue = queue.get(message.guild.id);
       var stopTimer;
 			if (!song) {
-        queue.delete(message.guild.id);
+        if (queue) return queue.delete(message.guild.id);
         function leaveChannel() {
           stopTimer = setTimeout(() => {
             curqueue.voiceChannel.leave();

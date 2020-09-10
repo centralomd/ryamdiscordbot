@@ -23,7 +23,7 @@ const status = [
 ];
 
 const Enmap = require('enmap');
-client.settings = new Enmap({
+const looping = new Enmap({
   name: "looping",
   fetchAll: false,
   autoFetch: true,
