@@ -25,6 +25,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-static": "^4.2.7",
     "genius-lyrics-api": "^3.0.3",
+    "scrape-yt": "^1.4.2",
     "sodium": "^3.0.2",
     "ytdl-core": "^3.2.2"
   }

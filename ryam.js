@@ -2,7 +2,6 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const prefix = 'r?'
 const queue = new Map();
-const { getLyrics, getSong } = require('genius-lyrics-api');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
