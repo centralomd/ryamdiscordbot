@@ -3,6 +3,7 @@ const ytdl = require('ytdl-core');
 const { Util } = require('discord.js');
 const YouTube = require("discord-youtube-api");
 const scrapeYt = require("scrape-yt");
+const arrayMove = require('array-move');
  
 const youtube = new YouTube("AIzaSyBdiNbhFfsILnFlRiYpGJ9uOGZCmzB4F88");
 
@@ -41,8 +42,7 @@ module.exports = {
     (async() => {
     const serverQueue = queue.get(message.guild.id);
     const video = await youtube.searchVideos(`${args.join(' ')}`);
-    let videos = await scrapeYt.search("Never gonna give you up");
-    console.log(videos[0]);
+    let video2 = await scrapeYt.search(`${args.join(' ')}`);
     
     const vidURL = video.url;
     const songInfo = await ytdl.getInfo(vidURL.replace(/<(.+)>/g, '$1'));
@@ -50,7 +50,8 @@ module.exports = {
 			id: songInfo.videoDetails.videoId,
       title: Util.escapeMarkdown(songInfo.videoDetails.title),
       url: songInfo.videoDetails.video_url,
-      //duration: ,
+      duration: video2.duration,
+      thumbnail: video2.thumbnail,
       requestor: message.author.tag
 		};
 
@@ -99,21 +100,14 @@ module.exports = {
         leaveChannel();
 			}
 
+      if (!song.url) console.log('URL Error!') //musicPlayer();
       const dispatcher = curqueue.connection.play(ytdl(song.url))
-				.on('finish', () => {
-          var i;
-
-          if (loopCheck === false) {
+				.on('finish', async () => {
+          if (loopCheck === true) {
+            const songArray = arrayMove()
+          } else {
             curqueue.songs.shift();
             play(curqueue.songs[0]);
-          } else {
-            if (i > curqueue.songs.length) {
-              i = 0
-            };
-
-              i = 1
-              play(curqueue.songs[1]);
-              i++;
           }
 				})
 				.on('error', error => {
@@ -122,6 +116,8 @@ module.exports = {
         })
       if (!dispatcher) return;
       dispatcher.setVolumeLogarithmic(curqueue.volume / 5);
+
+      //musicPlayer();
 
       const addSongEmbed = new Discord.MessageEmbed()
       .setColor('#1CE300')

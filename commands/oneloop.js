@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+/*const Discord = require('discord.js');
 const Enmap = require('enmap');
 
 module.exports = {
@@ -21,4 +21,4 @@ module.exports = {
           message.channel.send('➡ Loop has been disabled!  **BETA**');
         }
 	},
-};
+};*/

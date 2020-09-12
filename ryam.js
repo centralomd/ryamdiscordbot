@@ -22,20 +22,10 @@ const status = [
 ];
 
 const Enmap = require('enmap');
-const looping = new Enmap({
-  name: "looping",
-  fetchAll: false,
-  autoFetch: true,
-  cloneLevel: 'deep'
-});
+const looping = new Enmap();
 
 
 client.once('ready', () => {
-    looping.defer.then( () => {
-    console.log(looping.size + " looping datas loaded.");
-    looping.set('Undefined', true);
-    });
-
 	    console.log(`${client.user.username} is online and running! With:\n Username: ${client.user.username}`)
 
     setInterval(() => {

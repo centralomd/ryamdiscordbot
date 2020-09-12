@@ -26,9 +26,9 @@ module.exports = {
             .addFields(
                 { name: `\u200b`, value: `\u200b` },
                 { name: `__Now Playing__`, value: `[${serverQueue.songs[0].title}](${serverQueue.songs[0].url})` },
-                { name: `__Song queue__`, value: `${serverQueue.songs.map(song => `• [${song.title}](${song.url})`).join('\n')}` },
+                { name: `__Song queue__`, value: `${serverQueue.songs.map(song => `• [${song.title}](${song.url}) | \`Requestor: ${song.requestor}\``).join('\n')}` },
             )
-            .setFooter('Music System • From centralomd#7083')
+            .setFooter(`Music System • ${serverQueue.songs.length} songs in queue!`)
 
             message.channel.send(queueEmbed);
 	}

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/centralomd/ryamdiscordbot#readme",
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "array-move": "^3.0.1",
     "better-sqlite3": "^7.1.0",
     "discord-youtube-api": "^0.1.0",
     "discord.js": "^12.3.1",
@@ -26,7 +27,6 @@
     "ffmpeg-static": "^4.2.7",
     "genius-lyrics-api": "^3.0.3",
     "scrape-yt": "^1.4.2",
-    "sodium": "^3.0.2",
     "ytdl-core": "^3.2.2"
   }
 }
