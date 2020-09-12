@@ -104,7 +104,8 @@ module.exports = {
       const dispatcher = curqueue.connection.play(ytdl(song.url))
 				.on('finish', async () => {
           if (loopCheck === true) {
-            const songArray = arrayMove()
+            const songArray = arrayMove(curqueue.songs, 0, -1)
+            play(songArray);
           } else {
             curqueue.songs.shift();
             play(curqueue.songs[0]);
