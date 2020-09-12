@@ -23,9 +23,12 @@ const status = [
 
 const Enmap = require('enmap');
 const looping = new Enmap();
+const oneLoop = new Enmap();
 
 
-client.once('ready', () => {
+client.once('ready', async () => {
+  await looping.defer;
+  await oneLoop.defer;
 	    console.log(`${client.user.username} is online and running! With:\n Username: ${client.user.username}`)
 
     setInterval(() => {
@@ -54,7 +57,7 @@ client.on('message', message => {
     }
 
     try {
-	    command.execute(message, args, Discord, client, queue, looping);
+	    command.execute(message, args, Discord, client, queue, looping, oneLoop);
     } catch (error) {
 	    console.error(error);
 	    message.reply('there was an error trying to execute that command!');

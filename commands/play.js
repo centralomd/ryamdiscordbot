@@ -11,7 +11,7 @@ module.exports = {
 	name: 'play',
 	description: 'Play the music.',
   aliases: ['p', 'pl', 'pla', 'listen'],
-	async execute(message, args, Discord, client, queue, looping) {
+	async execute(message, args, Discord, client, queue, looping, oneLoop) {
     const { channel } = message.member.voice;
 		if (!channel) return message.channel.send('❌ **Error**: You need to be **in a voicechat** for me to be able to play music!');
 		const permissions = channel.permissionsFor(message.client.user);
@@ -84,10 +84,12 @@ module.exports = {
 		queueConstruct.songs.push(song);
 
 		const play = async song => {
-      if (!looping.has(message.guild.id)) looping.set(message.guild.id, false)
+      if (!looping.has(message.guild.id)) looping.set(message.guild.id, 'false');
+      if (!oneLoop.has(message.guild.id)) oneLoop.set(message.guild.id, 'false');
 
       const curqueue = queue.get(message.guild.id);
-      const loopCheck = looping.get(message.guild.id);
+
+      looping.deleteAll();
       
       var stopTimer;
 			if (!song) {
@@ -103,14 +105,20 @@ module.exports = {
       if (!song.url) console.log('URL Error!') //musicPlayer();
       const dispatcher = curqueue.connection.play(ytdl(song.url))
 				.on('finish', async () => {
-          if (loopCheck === true) {
-            const songArray = arrayMove(curqueue.songs, 0, -1)
-            play(songArray);
-          } else {
-            curqueue.songs.shift();
-            play(curqueue.songs[0]);
-          }
-				})
+          const loopCheck = looping.get(message.guild.id);
+          const oneCheck = oneLoop.get(message.guild.id)
+            
+            if (loopCheck === 'true') {
+              const firstSong = curqueue.songs.shift()
+              curqueue.songs[curqueue.songs.length] = firstSong;
+              play(curqueue.songs[0]);
+            } else if (oneCheck === 'true') {
+              play(curqueue.songs[0]);
+            } else {
+              curqueue.songs.shift();
+              play(curqueue.songs[0]);
+            }
+          })
 				.on('error', error => {
           console.error(error)
           if (error.name === 'UnhandledPromiseRejectionWarning') return;
