@@ -9,7 +9,9 @@ module.exports = {
 		const serverQueue = queue.get(message.guild.id);
 		if (!serverQueue) return message.channel.send('There is nothing playing that I could stop for you.');
 
-		serverQueue.connection.dispatcher.end('Stop command has been used!');
+		serverQueue.connection.dispatcher.end('Stop command has been used!').catch(console.error);
+    serverQueue.voiceChannel.leave();
+    if (queue) return queue.delete(message.guild.id);
 
     const stopEmbed = new Discord.MessageEmbed()
       .setColor('#FF98FD')
@@ -22,8 +24,6 @@ module.exports = {
       )
       .setFooter('Music System • From centralomd#7083')
       
-      serverQueue.voiceChannel.leave();
       message.channel.send(stopEmbed);
-      if (queue) return queue.delete(message.guild.id);
 	}
 };

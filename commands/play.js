@@ -87,9 +87,10 @@ module.exports = {
       if (!looping.has(message.guild.id)) looping.set(message.guild.id, 'false');
       if (!oneLoop.has(message.guild.id)) oneLoop.set(message.guild.id, 'false');
 
-      const curqueue = queue.get(message.guild.id);
+      const loopCheck = looping.get(message.guild.id);
+      const oneCheck = oneLoop.get(message.guild.id)
 
-      looping.deleteAll();
+      const curqueue = queue.get(message.guild.id);
       
       var stopTimer;
 			if (!song) {
@@ -102,12 +103,9 @@ module.exports = {
         leaveChannel();
 			}
 
-      if (!song.url) console.log('URL Error!') //musicPlayer();
-      const dispatcher = curqueue.connection.play(ytdl(song.url))
-				.on('finish', async () => {
-          const loopCheck = looping.get(message.guild.id);
-          const oneCheck = oneLoop.get(message.guild.id)
-            
+      const dispatcher = await curqueue.connection.play(ytdl(song.url))
+				.on('finish', async () => {  
+          curqueue.textChannel.setTopic(`⏹ Put Music Bot commands here! No off-topic communication is allowed.`)          
             if (loopCheck === 'true') {
               const firstSong = curqueue.songs.shift()
               curqueue.songs[curqueue.songs.length] = firstSong;
@@ -121,7 +119,13 @@ module.exports = {
           })
 				.on('error', error => {
           console.error(error)
-          if (error.name === 'UnhandledPromiseRejectionWarning') return;
+          if (error.name === 'UnhandledPromiseRejectionWarning') {
+            console.log(`URL Error: ${error}`);
+          } else if (error.name === 'TypeError') {
+            console.log(`URL Error: ${error}`);
+          } else {
+            console.log('Error at Playing Music!')
+          }
         })
       if (!dispatcher) return;
       dispatcher.setVolumeLogarithmic(curqueue.volume / 5);
@@ -139,14 +143,18 @@ module.exports = {
       )
       .setFooter('Music System • From centralomd#7083')
 
+    curqueue.textChannel.setTopic(`▶ Playing: **${song.title}** on **${curqueue.voiceChannel.name}** | Requestor: ${song.requestor}`, 'New Music has been played!');
+
+    if (loopCheck === 'false' || oneCheck === 'false') {
       curqueue.textChannel.send(addSongEmbed);
+    };
       
       function stopCancel() {
         clearTimeout(stopTimer);
       }
 
       stopCancel();
-		};
+		}
 
 		try {
 			const connection = await channel.join();
